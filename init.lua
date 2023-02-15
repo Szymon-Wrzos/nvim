@@ -31,6 +31,17 @@ require("packer").startup(function(use)
 	use("jay-babu/mason-null-ls.nvim")
 	use("nvim-telescope/telescope.nvim")
 	use("nvim-tree/nvim-web-devicons")
+	use({
+		"nvim-lualine/lualine.nvim",
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	})
+
+	use({
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end,
+	})
 end)
 
 require("key_bindings")
@@ -79,3 +90,4 @@ require("langs.css.init")
 
 -- Plugins
 require("plugins.telescope.init")
+require("plugins.gitsigns.init")
