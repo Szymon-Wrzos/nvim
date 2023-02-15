@@ -30,7 +30,6 @@ require("packer").startup(function(use)
 	use("lukas-reineke/lsp-format.nvim")
 	use("jay-babu/mason-null-ls.nvim")
 	use("nvim-telescope/telescope.nvim")
-	use("nvim-tree/nvim-web-devicons")
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
@@ -91,3 +90,4 @@ require("langs.css.init")
 -- Plugins
 require("plugins.telescope.init")
 require("plugins.gitsigns.init")
+require("plugins.lualine.init")
