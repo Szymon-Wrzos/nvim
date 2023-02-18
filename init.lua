@@ -41,6 +41,7 @@ require("packer").startup(function(use)
 			require("gitsigns").setup()
 		end,
 	})
+	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
 end)
 
 require("key_bindings")
@@ -86,8 +87,9 @@ require("langs.lua.init")
 require("langs.rust.init")
 require("langs.javascript.init")
 require("langs.css.init")
-
+require("langs.html.init")
 -- Plugins
 require("plugins.telescope.init")
 require("plugins.gitsigns.init")
 require("plugins.lualine.init")
+require("plugins.bufferline.init")

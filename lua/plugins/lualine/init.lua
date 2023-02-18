@@ -1,4 +1,4 @@
-local function hello()
+local function get_time()
 	return os.date("%H:%M")
 end
 
@@ -26,7 +26,7 @@ require("lualine").setup({
 		lualine_b = { "branch", "diff", "diagnostics" },
 		lualine_c = { "filename" },
 		lualine_x = { "encoding", "fileformat", "filetype" },
-		lualine_y = { hello },
+		lualine_y = { get_time },
 		lualine_z = { "location" },
 	},
 	inactive_sections = {
