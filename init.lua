@@ -42,6 +42,8 @@ require("packer").startup(function(use)
 		end,
 	})
 	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
+	use({ "kylechui/nvim-surround" })
+	use({ "windwp/nvim-ts-autotag" })
 end)
 
 require("key_bindings")
@@ -52,6 +54,9 @@ require("nvim-treesitter.configs").setup({
 	ensure_installed = { "python", "c", "vim", "help" },
 	auto_install = true,
 	highlight = {
+		enable = true,
+	},
+	autotag = {
 		enable = true,
 	},
 })
@@ -93,3 +98,5 @@ require("plugins.telescope.init")
 require("plugins.gitsigns.init")
 require("plugins.lualine.init")
 require("plugins.bufferline.init")
+
+require("nvim-surround").setup({})
