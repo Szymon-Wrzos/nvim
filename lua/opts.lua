@@ -7,5 +7,6 @@ opt.tabstop = 2
 opt.shiftwidth = 2
 opt.termguicolors = true
 opt.shell = "zsh"
+opt.clipboard = "unnamedplus"
 
 vim.cmd.colorscheme("melange")
