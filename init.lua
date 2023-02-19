@@ -49,7 +49,9 @@ require("packer").startup(function(use)
 	use({
 		"folke/trouble.nvim",
 		requires = "nvim-tree/nvim-web-devicons",
+		auto_install = true,
 	})
+	use({ "nvim-tree/nvim-web-devicons" })
 end)
 
 require("key_bindings")
@@ -111,3 +113,4 @@ require("plugins.bufferline.init")
 require("plugins.trouble.init")
 
 require("nvim-surround").setup({})
+require("nvim-web-devicons").setup({})
