@@ -44,10 +44,20 @@ require("packer").startup(function(use)
 	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
 	use({ "kylechui/nvim-surround" })
 	use({ "windwp/nvim-ts-autotag" })
+	use({ "nvim-treesitter/nvim-tree-docs" })
+
+	use({
+		"folke/trouble.nvim",
+		requires = "nvim-tree/nvim-web-devicons",
+	})
 end)
 
 require("key_bindings")
 require("opts")
+
+require("nvim-treesitter.configs").setup({
+	tree_docs = { enable = true },
+})
 
 require("nvim-treesitter.configs").setup({
 	-- A list of parser names, or "all" (the four listed parsers should always be installed)
@@ -98,5 +108,6 @@ require("plugins.telescope.init")
 require("plugins.gitsigns.init")
 require("plugins.lualine.init")
 require("plugins.bufferline.init")
+require("plugins.trouble.init")
 
 require("nvim-surround").setup({})
