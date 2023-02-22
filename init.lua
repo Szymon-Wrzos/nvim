@@ -63,7 +63,7 @@ require("nvim-treesitter.configs").setup({
 
 require("nvim-treesitter.configs").setup({
 	-- A list of parser names, or "all" (the four listed parsers should always be installed)
-	ensure_installed = { "python", "c", "vim", "help" },
+	ensure_installed = { "python", "c", "vim", "help", "markdown", "markdown_inline" },
 	auto_install = true,
 	highlight = {
 		enable = true,
@@ -105,6 +105,7 @@ require("langs.rust.init")
 require("langs.javascript.init")
 require("langs.css.init")
 require("langs.html.init")
+require("langs.tailwindcss.init")
 -- Plugins
 require("plugins.telescope.init")
 require("plugins.gitsigns.init")
