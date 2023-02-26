@@ -102,6 +102,8 @@ require("langs.javascript.init")
 require("langs.css.init")
 require("langs.html.init")
 require("langs.tailwindcss.init")
+require("langs.python.init")
+
 -- Plugins
 require("plugins.telescope.init")
 require("plugins.gitsigns.init")
