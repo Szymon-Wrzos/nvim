@@ -4,7 +4,7 @@ require("nvim-treesitter.configs").setup({
 })
 
 require("mason-lspconfig").setup({
-	ensure_installed = { "ruff_lsp" },
+	ensure_installed = { "pyright" },
 })
 
 require("mason-null-ls").setup({
@@ -14,7 +14,9 @@ require("mason-null-ls").setup({
 local format = require("lsp-format")
 format.setup({})
 
-require("lspconfig")["pyright"].setup({})
+require("lspconfig")["pyright"].setup({
+	on_attach = format.on_attach,
+})
 
 local null_ls = require("null-ls")
 
@@ -25,5 +27,5 @@ null_ls.setup({
 		null_ls.builtins.completion.luasnip,
 	},
 	debug = false,
-	on_attach = require("lsp-format").on_attach,
+	on_attach = format.on_attach,
 })
