@@ -29,5 +29,6 @@
         "/home/szymon/.local/share/nvim/site/pack/packer/start/cmp-vsnip/after",
         "/home/szymon/.local/share/nvim/site/pack/packer/start/rnvimr/after",
         "${3rd}/luassert/library"
-    ]
+    ],
+    "workspace.checkThirdParty": false
 }

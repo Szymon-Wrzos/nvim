@@ -46,7 +46,7 @@ null_ls.setup({
 	sources = {
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.diagnostics.luacheck,
-		null_ls.builtins.completion.vsnip,
+		null_ls.builtins.completion.luasnip.with({ filetypes = { "lua" } }),
 	},
 	debug = false,
 	on_attach = require("lsp-format").on_attach,

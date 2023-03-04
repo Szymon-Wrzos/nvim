@@ -19,32 +19,17 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local format = require("lsp-format")
 format.setup({})
 
-local prettierd = {
-	formatCommand = [[prettierd ${INPUT}]],
-	formatStdin = true,
-}
-
 require("lspconfig")["tsserver"].setup({
 	capabilities = capabilities,
 	on_attach = format.on_attach,
-	settings = {
-		languages = {
-			typescript = { prettierd },
-			javascript = { prettierd },
-			javascriptreact = { prettierd },
-			typescriptreact = { prettierd },
-		},
-	},
 })
 
 local null_ls = require("null-ls")
 
-null_ls.setup({
+null_ls.register({
 	sources = {
-		null_ls.builtins.formatting.prettier,
+		null_ls.builtins.formatting.eslint_d,
 		null_ls.builtins.diagnostics.eslint_d,
-		null_ls.builtins.completion.luasnip,
+		null_ls.builtins.code_actions.eslint_d,
 	},
-	debug = false,
-	on_attach = require("lsp-format").on_attach,
 })
