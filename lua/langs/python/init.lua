@@ -20,12 +20,9 @@ require("lspconfig")["pyright"].setup({
 
 local null_ls = require("null-ls")
 
-null_ls.setup({
+null_ls.register({
 	sources = {
 		null_ls.builtins.formatting.ruff,
 		null_ls.builtins.diagnostics.ruff,
-		null_ls.builtins.completion.luasnip,
 	},
-	debug = false,
-	on_attach = format.on_attach,
 })

@@ -11,7 +11,7 @@ require("mason-lspconfig").setup({
 })
 
 require("mason-null-ls").setup({
-	ensure_installed = { "stylelint" },
+	ensure_installed = { "stylelint", "prettierd" },
 })
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -26,12 +26,9 @@ require("lspconfig")["cssmodules_ls"].setup({
 
 local null_ls = require("null-ls")
 
-null_ls.setup({
+null_ls.register({
 	sources = {
 		null_ls.builtins.diagnostics.stylelint,
-		null_ls.builtins.formatting.prettierd,
-		null_ls.builtins.completion.luasnip,
+		null_ls.builtins.formatting.prettierd.with({filetypes= {"css", "sass", "scss"}}),
 	},
-	debug = false,
-	on_attach = require("lsp-format").on_attach,
 })

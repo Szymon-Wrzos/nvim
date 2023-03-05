@@ -15,16 +15,14 @@ require("mason-null-ls").setup({
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-require("lspconfig").rust_analyzer.setup({
+require("lspconfig")["rust_analyzer"].setup({
 	capabilities = capabilities,
 })
 
 local null_ls = require("null-ls")
 
-null_ls.setup({
+null_ls.register({
 	sources = {
 		null_ls.builtins.formatting.rustfmt,
 	},
-	debug = false,
-	on_attach = require("lsp-format").on_attach,
 })

@@ -10,7 +10,7 @@ require("lspconfig")["tailwindcss"].setup({})
 
 local null_ls = require("null-ls")
 
-null_ls.setup({
+null_ls.register({
 	sources = {
 		null_ls.builtins.formatting.rustywind,
 	},

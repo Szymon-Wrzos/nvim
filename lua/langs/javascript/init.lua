@@ -11,7 +11,7 @@ require("mason-lspconfig").setup({
 })
 
 require("mason-null-ls").setup({
-	ensure_installed = { "eslint_d", "prettierd", "prettier" },
+	ensure_installed = { "eslint_d", "prettierd" },
 })
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -24,6 +24,7 @@ require("lspconfig")["tsserver"].setup({
 	on_attach = format.on_attach,
 })
 
+
 local null_ls = require("null-ls")
 
 null_ls.register({
@@ -32,4 +33,5 @@ null_ls.register({
 		null_ls.builtins.diagnostics.eslint_d,
 		null_ls.builtins.code_actions.eslint_d,
 	},
+  debug= true,
 })
