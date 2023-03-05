@@ -16,14 +16,9 @@ require("mason-null-ls").setup({
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-local format = require("lsp-format")
-format.setup({})
-
 require("lspconfig")["tsserver"].setup({
 	capabilities = capabilities,
-	on_attach = format.on_attach,
 })
-
 
 local null_ls = require("null-ls")
 
@@ -33,5 +28,5 @@ null_ls.register({
 		null_ls.builtins.diagnostics.eslint_d,
 		null_ls.builtins.code_actions.eslint_d,
 	},
-  debug= true,
+	debug = true,
 })

@@ -11,12 +11,7 @@ require("mason-null-ls").setup({
 	ensure_installed = { "ruff" },
 })
 
-local format = require("lsp-format")
-format.setup({})
-
-require("lspconfig")["pyright"].setup({
-	on_attach = format.on_attach,
-})
+require("lspconfig")["pyright"].setup({})
 
 local null_ls = require("null-ls")
 
