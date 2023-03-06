@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "javascript", "typescript" },
+	ensure_installed = { "yaml" },
 	auto_install = true,
 	highlight = {
 		enable = true,
@@ -7,16 +7,16 @@ require("nvim-treesitter.configs").setup({
 })
 
 require("mason-lspconfig").setup({
-	ensure_installed = { "tsserver" },
+	ensure_installed = { "yamlls" },
 })
 
 require("mason-null-ls").setup({
-	ensure_installed = { "eslint_d" },
+	ensure_installed = { "yamllint", "prettierd" },
 })
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-require("lspconfig")["tsserver"].setup({
+require("lspconfig")["yamlls"].setup({
 	capabilities = capabilities,
 })
 
@@ -24,9 +24,8 @@ local null_ls = require("null-ls")
 
 null_ls.register({
 	sources = {
-		null_ls.builtins.formatting.eslint_d,
-		null_ls.builtins.diagnostics.eslint_d,
-		null_ls.builtins.code_actions.eslint_d,
+		null_ls.builtins.formatting.prettierd,
+		null_ls.builtins.diagnostics.yamllint,
 	},
 	debug = true,
 })

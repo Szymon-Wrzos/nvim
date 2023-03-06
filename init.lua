@@ -62,7 +62,7 @@ require("nvim-treesitter.configs").setup({
 
 require("nvim-treesitter.configs").setup({
 	-- A list of parser names, or "all" (the four listed parsers should always be installed)
-	ensure_installed = { "python", "c", "vim", "help", "markdown", "markdown_inline" },
+	ensure_installed = { "c", "vim", "help", "markdown", "markdown_inline" },
 	auto_install = true,
 	highlight = {
 		enable = true,
@@ -70,6 +70,14 @@ require("nvim-treesitter.configs").setup({
 })
 
 require("mason").setup({})
+-- Plugins setup
+require("plugins.telescope.init")
+require("plugins.gitsigns.init")
+require("plugins.lualine.init")
+require("plugins.bufferline.init")
+require("plugins.trouble.init")
+require("plugins.cmp.init")
+
 -- Languages setup
 local null_ls = require("null-ls")
 null_ls.setup({
@@ -86,14 +94,8 @@ require("langs.css.init")
 require("langs.html.init")
 require("langs.tailwindcss.init")
 require("langs.python.init")
-
--- Plugins setup
-require("plugins.telescope.init")
-require("plugins.gitsigns.init")
-require("plugins.lualine.init")
-require("plugins.bufferline.init")
-require("plugins.trouble.init")
-require("plugins.cmp.init")
+require("langs.json.init")
+require("langs.yaml.init")
 
 require("nvim-web-devicons").setup({})
 require("nvim-ts-autotag").setup()
