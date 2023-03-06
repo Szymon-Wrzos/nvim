@@ -9,6 +9,7 @@ require("packer").startup(function(use)
 	use("williamboman/mason-lspconfig.nvim")
 	use("neovim/nvim-lspconfig")
 
+	use("b0o/schemastore.nvim")
 	use("hrsh7th/cmp-nvim-lsp")
 	use({
 		"hrsh7th/nvim-cmp",
