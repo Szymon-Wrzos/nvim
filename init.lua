@@ -97,6 +97,7 @@ require("langs.tailwindcss.init")
 require("langs.python.init")
 require("langs.json.init")
 require("langs.yaml.init")
+require("langs.markdown.init")
 
 require("nvim-web-devicons").setup({})
 require("nvim-ts-autotag").setup()
