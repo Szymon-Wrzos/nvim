@@ -11,7 +11,7 @@ require("mason-lspconfig").setup({
 })
 
 require("mason-null-ls").setup({
-	ensure_installed = { "yamllint", "prettierd" },
+	ensure_installed = { "yamllint", "prettierd", "yamlfmt" },
 })
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -24,7 +24,7 @@ local null_ls = require("null-ls")
 
 null_ls.register({
 	sources = {
-		null_ls.builtins.formatting.prettierd,
+		null_ls.builtins.formatting.yamlfmt,
 		null_ls.builtins.diagnostics.yamllint,
 	},
 	debug = true,
