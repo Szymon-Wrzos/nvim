@@ -7,7 +7,7 @@ require("nvim-treesitter.configs").setup({
 })
 
 require("mason-lspconfig").setup({
-	ensure_installed = { "cssls", "cssmodules_ls" },
+	ensure_installed = { "stylelint_lsp", "cssls", "cssmodules_ls" },
 })
 
 require("mason-null-ls").setup({
@@ -28,7 +28,6 @@ local null_ls = require("null-ls")
 
 null_ls.register({
 	sources = {
-		null_ls.builtins.diagnostics.stylelint,
-		null_ls.builtins.formatting.prettierd.with({filetypes= {"css", "sass", "scss"}}),
+		null_ls.builtins.formatting.prettierd.with({ filetypes = { "css", "sass", "scss" } }),
 	},
 })
