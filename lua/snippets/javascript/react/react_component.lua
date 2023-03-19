@@ -1,22 +1,20 @@
 local luasnip = require("luasnip")
 local format = require("luasnip.extras.fmt").fmt
 
-local create_snippet = luasnip.snippet
-local insert_node = luasnip.insert_node
+local snip = luasnip.snippet
+local node = luasnip.snippet_node
+local text = luasnip.text_node
+local insert = luasnip.insert_node
+local func = luasnip.function_node
+local choice = luasnip.choice_node
+local dynamicn = luasnip.dynamic_node
 
-return create_snippet(
-	"rfc",
-	format(
-		[[
-export const {} = () => {{
-    return (
-        {}
-    )
-}}
-    ]],
-		{
-			insert_node(1),
-			insert_node(2),
-		}
-	)
-)
+local export_method = {
+	insert(1),
+	text(" "),
+}
+return snip({
+	dscr = "React component boilerplate",
+	trig = "ComBoi",
+	name = "React component",
+}, { export_method })
