@@ -7,11 +7,12 @@ require("nvim-treesitter.configs").setup({
 })
 
 require("mason-lspconfig").setup({
-	ensure_installed = { "stylelint_lsp", "cssls", "cssmodules_ls" },
+	ensure_installed = { "cssls", "cssmodules_ls" },
 })
 
 require("mason-null-ls").setup({
 	ensure_installed = { "stylelint", "prettierd" },
+	automatic_installation = true,
 })
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -29,5 +30,6 @@ local null_ls = require("null-ls")
 null_ls.register({
 	sources = {
 		null_ls.builtins.formatting.prettierd.with({ filetypes = { "css", "sass", "scss" } }),
+		-- null_ls.builtins.formatting["stylelint"],
 	},
 })
