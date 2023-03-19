@@ -27,7 +27,7 @@ local null_ls = require("null-ls")
 
 null_ls.register({
 	sources = {
-		null_ls.builtins.formatting.prettierd,
+		null_ls.builtins.formatting.prettierd.with({ filetypes = { "json" } }),
 		null_ls.builtins.diagnostics.jsonlint,
 	},
 	debug = true,
