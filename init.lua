@@ -52,6 +52,7 @@ require("packer").startup(function(use)
 	})
 	use({ "nvim-tree/nvim-web-devicons" })
 	use({ "windwp/nvim-ts-autotag" })
+	use({ "windwp/nvim-spectre" })
 end)
 
 require("key_bindings")
@@ -78,6 +79,7 @@ require("plugins.lualine.init")
 require("plugins.bufferline.init")
 require("plugins.trouble.init")
 require("plugins.cmp.init")
+require("plugins.spectre.init")
 
 -- Languages setup
 local null_ls = require("null-ls")
