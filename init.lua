@@ -57,6 +57,9 @@ require("packer").startup(function(use)
 		"weilbith/nvim-code-action-menu",
 		cmd = "CodeActionMenu",
 	})
+	use({
+		"tpope/vim-fugitive",
+	})
 end)
 
 require("key_bindings")
