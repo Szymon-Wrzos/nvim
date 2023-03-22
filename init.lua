@@ -53,6 +53,10 @@ require("packer").startup(function(use)
 	use({ "nvim-tree/nvim-web-devicons" })
 	use({ "windwp/nvim-ts-autotag" })
 	use({ "windwp/nvim-spectre" })
+	use({
+		"weilbith/nvim-code-action-menu",
+		cmd = "CodeActionMenu",
+	})
 end)
 
 require("key_bindings")
