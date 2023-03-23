@@ -57,9 +57,7 @@ require("packer").startup(function(use)
 		"weilbith/nvim-code-action-menu",
 		cmd = "CodeActionMenu",
 	})
-	use({
-		"tpope/vim-fugitive",
-	})
+	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
 end)
 
 require("key_bindings")
@@ -111,6 +109,8 @@ require("langs.graphql.init")
 
 require("nvim-web-devicons").setup({})
 require("nvim-ts-autotag").setup()
-
 -- Snippets
 require("snippets.javascript.init")
+
+local neogit = require("neogit")
+neogit.setup({})
