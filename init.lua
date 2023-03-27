@@ -48,7 +48,6 @@ require("packer").startup(function(use)
 	use({
 		"folke/trouble.nvim",
 		requires = "nvim-tree/nvim-web-devicons",
-		auto_install = true,
 	})
 	use({ "nvim-tree/nvim-web-devicons" })
 	use({ "windwp/nvim-ts-autotag" })
@@ -58,6 +57,8 @@ require("packer").startup(function(use)
 		cmd = "CodeActionMenu",
 	})
 	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
+	use({ "terrortylor/nvim-comment" })
+	use({ "brenoprata10/nvim-highlight-colors" })
 end)
 
 require("key_bindings")
@@ -112,5 +113,6 @@ require("nvim-ts-autotag").setup()
 -- Snippets
 require("snippets.javascript.init")
 
-local neogit = require("neogit")
-neogit.setup({})
+require("neogit").setup({})
+require("nvim_comment").setup({})
+require("nvim-highlight-colors").setup({})
