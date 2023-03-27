@@ -8,7 +8,7 @@ require("mason-lspconfig").setup({
 })
 
 require("mason-null-ls").setup({
-	ensure_installed = { "ruff" },
+	ensure_installed = { "black" },
 })
 
 require("lspconfig")["pyright"].setup({})
@@ -17,7 +17,6 @@ local null_ls = require("null-ls")
 
 null_ls.register({
 	sources = {
-		null_ls.builtins.formatting.ruff,
-		null_ls.builtins.diagnostics.ruff,
+		null_ls.builtins.formatting.black,
 	},
 })
