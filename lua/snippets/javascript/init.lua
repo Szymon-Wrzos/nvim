@@ -8,3 +8,4 @@ local react_snippets = {
 
 luasnip.add_snippets("typescriptreact", react_snippets)
 luasnip.add_snippets("javascriptreact", react_snippets)
+luasnip.add_snippets("javascript", react_snippets)

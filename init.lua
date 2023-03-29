@@ -110,9 +110,10 @@ require("langs.graphql.init")
 
 require("nvim-web-devicons").setup({})
 require("nvim-ts-autotag").setup()
--- Snippets
-require("snippets.javascript.init")
 
 require("neogit").setup({})
 require("nvim_comment").setup({})
 require("nvim-highlight-colors").setup({})
+
+-- Snippets
+require("snippets.javascript.init")

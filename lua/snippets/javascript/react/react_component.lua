@@ -1,20 +1,43 @@
 local luasnip = require("luasnip")
-local format = require("luasnip.extras.fmt").fmt
+local sn = luasnip.snippet
+local i = luasnip.insert_node
+local c = luasnip.choice_node
+local t = luasnip.t
+local s = luasnip.snippet_node
+local d = luasnip.dynamic_node
+local fmt = require("luasnip.extras.fmt").fmt
 
-local snip = luasnip.snippet
-local node = luasnip.snippet_node
-local text = luasnip.text_node
-local insert = luasnip.insert_node
-local func = luasnip.function_node
-local choice = luasnip.choice_node
-local dynamicn = luasnip.dynamic_node
+local react_boilerplate = sn(
+	"FunComBoi",
+	fmt(
+		[[
+const {name} = () => {{
+   /* Your function goes here*/
+}};
+{prop_types}
 
-local export_method = {
-	insert(1),
-	text(" "),
-}
-return snip({
-	dscr = "React component boilerplate",
-	trig = "ComBoi",
-	name = "React component",
-}, { export_method })
+{export_method}
+]],
+		{
+			-- i(1) is at nodes[1], i(2) at nodes[2].
+			name = i(1, "Component"),
+			prop_types = d(2, function(args)
+				local component_name = args[1][1]
+				return s(nil, {
+					t(component_name .. ".propTypes = {};"),
+				})
+			end, { 1 }),
+			export_method = d(3, function(args)
+				local component_name = args[1][1]
+				return s(nil, {
+					c(1, {
+						i(1, "export default " .. component_name .. ";"),
+						i(2, "export { " .. component_name .. " };"),
+					}),
+				})
+			end, { 1 }),
+		}
+	)
+)
+
+return react_boilerplate
