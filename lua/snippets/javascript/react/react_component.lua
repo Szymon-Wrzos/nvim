@@ -11,6 +11,9 @@ local react_boilerplate = sn(
 	"FunComBoi",
 	fmt(
 		[[
+import React from 'react';
+import PropTypes from 'prop-types';
+
 const {name} = () => {{
    /* Your function goes here*/
 }};
