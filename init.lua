@@ -59,6 +59,7 @@ require("packer").startup(function(use)
 	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
 	use({ "terrortylor/nvim-comment" })
 	use({ "brenoprata10/nvim-highlight-colors" })
+	use({ "nvim-treesitter/playground" })
 end)
 
 require("key_bindings")
