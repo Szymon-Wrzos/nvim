@@ -14,7 +14,8 @@ cmp.setup({
 	},
 	sources = cmp.config.sources({
 		{ name = "luasnip" },
-		{ name = "nvim_lsp" },
+    { name = "cmp-tw2css"},
+    { name = "nvim_lsp" },
 		{ name = "path" },
 		{ name = "buffer" },
 	}),
