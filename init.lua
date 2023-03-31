@@ -121,3 +121,4 @@ require("nvim-highlight-colors").setup({})
 
 -- Snippets
 require("snippets.javascript.init")
+require("snippets.css.init")
