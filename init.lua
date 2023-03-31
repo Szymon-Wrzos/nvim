@@ -2,7 +2,7 @@ require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 	use("savq/melange-nvim")
-	use("kevinhwang91/rnvimr")
+	use("nvim-tree/nvim-tree.lua")
 	use("nvim-treesitter/nvim-treesitter")
 
 	use("williamboman/mason.nvim")

@@ -1,7 +1,5 @@
 local opts = { noremap = true, silent = true }
 
-vim.keymap.set("n", "<leader>rr", "<cmd>:RnvimrToggle<cr>", { desc = "[S]earch [R]esume" })
-
 vim.keymap.set("n", "<leader>ca", "<cmd>:CodeActionMenu<cr>", { desc = "[C]ode [A]ction" })
 
 vim.keymap.set({ "i", "s" }, "<Tab>", function()
