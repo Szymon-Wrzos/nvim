@@ -90,7 +90,7 @@ require("plugins.bufferline.init")
 require("plugins.trouble.init")
 require("plugins.cmp.init")
 require("plugins.spectre.init")
-
+require("plugins.nvim_tree.init")
 -- Languages setup
 local null_ls = require("null-ls")
 null_ls.setup({
