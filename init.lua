@@ -63,6 +63,7 @@ require("packer").startup(function(use)
 	use({ "jcha0713/cmp-tw2css" })
 	use({ "hrsh7th/cmp-omni" })
 	use({ "hrsh7th/cmp-nvim-lsp-document-symbol" })
+	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 end)
 
 require("key_bindings")
@@ -118,7 +119,7 @@ require("nvim-ts-autotag").setup()
 require("neogit").setup({})
 require("nvim_comment").setup({})
 require("nvim-highlight-colors").setup({})
-
+require("diffview").setup()
 -- Snippets
 require("snippets.javascript.init")
 require("snippets.css.init")
