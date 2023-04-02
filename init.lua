@@ -112,6 +112,7 @@ require("langs.json.init")
 require("langs.yaml.init")
 require("langs.markdown.init")
 require("langs.graphql.init")
+require("langs.vue.init")
 
 require("nvim-web-devicons").setup({})
 require("nvim-ts-autotag").setup()
