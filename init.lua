@@ -25,7 +25,7 @@ require("packer").startup(function(use)
 	use({
 		"L3MON4D3/LuaSnip",
 	})
-
+	use("onsails/lspkind.nvim")
 	use("nvim-lua/plenary.nvim")
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("lukas-reineke/lsp-format.nvim")
@@ -35,12 +35,11 @@ require("packer").startup(function(use)
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
-
+	use({
+		"benfowler/telescope-luasnip.nvim",
+	})
 	use({
 		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("gitsigns").setup()
-		end,
 	})
 	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
 	use({ "nvim-treesitter/nvim-tree-docs" })
