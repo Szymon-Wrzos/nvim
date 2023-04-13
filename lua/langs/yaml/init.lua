@@ -18,13 +18,29 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 require("lspconfig")["yamlls"].setup({
 	capabilities = capabilities,
+
+	settings = {
+		yaml = {
+			schemas = require("schemastore").json.schemas(),
+			validate = false,
+		},
+	},
 })
 
 local null_ls = require("null-ls")
 
 null_ls.register({
 	sources = {
-		null_ls.builtins.diagnostics.yamllint,
+		null_ls.builtins.diagnostics.yamllint.with({
+			args = {
+				"--format",
+				"parsable",
+				"--config-file",
+				os.getenv("HOME") .. "/.config/nvim/lua/langs/yaml/yamllint_config.yml",
+				"--no-warnings",
+				"-",
+			},
+		}),
 	},
 	debug = true,
 })
