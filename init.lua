@@ -63,6 +63,7 @@ require("packer").startup(function(use)
 	use({ "hrsh7th/cmp-omni" })
 	use({ "hrsh7th/cmp-nvim-lsp-document-symbol" })
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
+	use("rmehri01/onenord.nvim")
 end)
 
 require("key_bindings")
@@ -123,3 +124,5 @@ require("diffview").setup()
 -- Snippets
 require("snippets.javascript.init")
 require("snippets.css.init")
+
+require("plugins.colorscheme.init")
