@@ -4,7 +4,7 @@ local tailwind_like_media_queries = require("snippets.css.css.tailwind_like_quer
 
 local css = {}
 
-for i, value in ipairs(tailwind_like_media_queries) do
+for _, value in ipairs(tailwind_like_media_queries) do
 	table.insert(css, value)
 end
 
