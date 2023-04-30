@@ -5,10 +5,12 @@ require("nvim-treesitter.configs").setup({
 
 require("mason-lspconfig").setup({
 	ensure_installed = { "pyright" },
+	automatic_installation = true,
 })
 
 require("mason-null-ls").setup({
 	ensure_installed = { "black" },
+	automatic_installation = true,
 })
 
 require("lspconfig")["pyright"].setup({})

@@ -8,9 +8,11 @@ require("nvim-treesitter.configs").setup({
 
 require("mason-lspconfig").setup({
 	ensure_installed = { "marksman" },
+	automatic_installation = true,
 })
 require("mason-null-ls").setup({
 	ensure_installed = { "markdownlint" },
+	automatic_installation = true,
 })
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()

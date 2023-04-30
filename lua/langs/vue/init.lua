@@ -5,6 +5,7 @@ require("nvim-treesitter.configs").setup({
 
 require("mason-lspconfig").setup({
 	ensure_installed = { "volar" },
+	automatic_installation = true,
 })
 
 require("mason-null-ls").setup({

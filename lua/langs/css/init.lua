@@ -8,6 +8,7 @@ require("nvim-treesitter.configs").setup({
 
 require("mason-lspconfig").setup({
 	ensure_installed = { "cssls", "cssmodules_ls" },
+	automatic_installation = true,
 })
 
 require("mason-null-ls").setup({

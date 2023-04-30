@@ -1,9 +1,11 @@
 require("mason-lspconfig").setup({
 	ensure_installed = { "tailwindcss" },
+	automatic_installation = true,
 })
 
 require("mason-null-ls").setup({
 	ensure_installed = { "rustywind" },
+	automatic_installation = true,
 })
 
 require("lspconfig")["tailwindcss"].setup({})
