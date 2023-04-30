@@ -37,10 +37,17 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{ name = "luasnip", max_item_count = 5 },
 		{ name = "cmp-tw2css", max_item_count = 5 },
-		{ name = "nvim_lsp", max_item_count = 10 },
+		{
+			name = "nvim_lsp",
+			max_item_count = 10,
+			entry_filter = function(entry)
+				return require("cmp").lsp.CompletionItemKind.Snippet ~= entry:get_kind()
+			end,
+		},
 		{ name = "path", max_item_count = 5 },
 		{ name = "buffer", max_item_count = 5 },
 	}),
+
 	mapping = cmp.mapping.preset.insert({
 		["<C-f>"] = cmp.mapping.scroll_docs(-4),
 		["<C-b>"] = cmp.mapping.scroll_docs(4),
