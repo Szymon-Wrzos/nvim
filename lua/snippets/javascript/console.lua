@@ -25,6 +25,7 @@ local function seek_function_root(node, ts_elements)
 end
 
 --- @param node TSNode | nil
+-- TODO: This has potential to work in other langauges - just dehardcode it someday
 local function get_data(node)
 	local filetype = vim.bo.filetype
 	local query_lang = filetype == "javascriptreact" and "jsx" or filetype
