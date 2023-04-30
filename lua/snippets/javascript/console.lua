@@ -1,4 +1,5 @@
 local luasnip = require("luasnip")
+local i = luasnip.insert_node
 local sn = luasnip.snippet
 local t = luasnip.text_node
 local s = luasnip.snippet_node
@@ -50,8 +51,8 @@ end
 
 local console = sn(
 	"con",
-	fmt([[ console.log("[{function_name}]","{test}")]], {
-		test = t(""),
+	fmt([[ console.log("[{function_name}]",{})]], {
+		i(0),
 		function_name = d(1, function()
 			local ts_node = ts.get_node()
 			local function_root = seek_function_root(
