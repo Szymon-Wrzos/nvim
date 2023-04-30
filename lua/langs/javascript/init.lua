@@ -13,6 +13,7 @@ require("mason-lspconfig").setup({
 
 require("mason-null-ls").setup({
 	ensure_installed = { "eslint_d" },
+	automatic_installation = true,
 })
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
