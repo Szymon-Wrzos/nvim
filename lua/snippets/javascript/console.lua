@@ -37,12 +37,13 @@ local function get_data(node)
 	if node_type == "program" then
 		return "global"
 	end
-	local parsed_query =
-		ts_query.parse(query_lang, (node_type == "method_definition" or node_type == "field_definition") and [[
-      (property_identifier) @name
-    ]] or [[
-      (identifier) @name
-    ]])
+	local query_str = [[
+    (variable_declarator (identifier) @name)
+    (function_declaration (identifier) @name)
+    (method_definition (property_identifier) @name)
+    (field_definition (property_identifier) @name)
+]]
+	local parsed_query = ts_query.parse(query_lang, query_str)
 	-- print("[get_data]")
 	for _, parsed_node, _ in parsed_query:iter_captures(node, 0, node:start(), node:end_()) do
 		return ts.get_node_text(parsed_node, 0)
