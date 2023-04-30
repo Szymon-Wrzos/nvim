@@ -35,7 +35,6 @@ local function get_data(node)
 	if node_type == "program" then
 		return "global"
 	end
-	vim.print(node_type)
 	local parsed_query =
 		ts_query.parse(query_lang, (node_type == "method_definition" or node_type == "field_definition") and [[
       (property_identifier) @name
