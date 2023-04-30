@@ -19,6 +19,13 @@ cmp.setup({
 			before = function(entry, vim_item)
 				return vim_item
 			end,
+			menu = {
+				nvim_lsp = "[LSP]",
+				luasnip = "[US]",
+				path = "[Path]",
+				buffer = "[Buffer]",
+				["cmp-tw2css"] = "[TW2CSS]",
+			},
 		}),
 	},
 
