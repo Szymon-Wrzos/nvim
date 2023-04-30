@@ -28,11 +28,11 @@ cmp.setup({
 		end,
 	},
 	sources = cmp.config.sources({
-		{ name = "luasnip" },
-		{ name = "cmp-tw2css" },
-		{ name = "nvim_lsp" },
-		{ name = "path" },
-		{ name = "buffer" },
+		{ name = "luasnip", max_item_count = 5 },
+		{ name = "cmp-tw2css", max_item_count = 5 },
+		{ name = "nvim_lsp", max_item_count = 10 },
+		{ name = "path", max_item_count = 5 },
+		{ name = "buffer", max_item_count = 5 },
 	}),
 	mapping = cmp.mapping.preset.insert({
 		["<C-f>"] = cmp.mapping.scroll_docs(-4),
