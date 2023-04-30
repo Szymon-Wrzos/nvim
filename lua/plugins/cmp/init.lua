@@ -21,7 +21,7 @@ cmp.setup({
 			end,
 			menu = {
 				nvim_lsp = "[LSP]",
-				luasnip = "[US]",
+				luasnip = "[Luasnip]",
 				path = "[Path]",
 				buffer = "[Buffer]",
 				["cmp-tw2css"] = "[TW2CSS]",
