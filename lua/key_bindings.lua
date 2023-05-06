@@ -15,3 +15,5 @@ vim.keymap.set({ "i", "s" }, "<Tab>", function()
 end, {
 	expr = true,
 })
+
+vim.keymap.set({ "n" }, "<leader>ha", vim.lsp.buf.hover, { desc = "Trigger [h]over [a]ction" })
