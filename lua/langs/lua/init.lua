@@ -47,6 +47,10 @@ local null_ls = require("null-ls")
 null_ls.register({
 	sources = {
 		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.diagnostics.luacheck,
+		null_ls.builtins.diagnostics.luacheck.with({
+			args = {
+				"--globals vim",
+			},
+		}),
 	},
 })
