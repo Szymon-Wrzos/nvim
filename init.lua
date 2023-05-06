@@ -68,19 +68,6 @@ end)
 require("key_bindings")
 require("opts")
 
-require("nvim-treesitter.configs").setup({
-	tree_docs = { enable = true },
-})
-
-require("nvim-treesitter.configs").setup({
-	-- A list of parser names, or "all" (the four listed parsers should always be installed)
-	ensure_installed = { "c", "vim", "help", "markdown", "markdown_inline" },
-	auto_install = true,
-	highlight = {
-		enable = true,
-	},
-})
-
 require("mason").setup({})
 -- Plugins setup
 require("plugins.telescope.init")
@@ -91,6 +78,7 @@ require("plugins.trouble.init")
 require("plugins.cmp.init")
 require("plugins.spectre.init")
 require("plugins.nvim_tree.init")
+require("plugins.treesitter.init")
 -- Languages setup
 local null_ls = require("null-ls")
 null_ls.setup({
