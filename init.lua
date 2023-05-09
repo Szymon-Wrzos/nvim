@@ -1,3 +1,4 @@
+vim.cmd([[ packadd packer.nvim ]])
 require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
@@ -49,7 +50,7 @@ require("packer").startup(function(use)
 		requires = "nvim-tree/nvim-web-devicons",
 	})
 	use({ "nvim-tree/nvim-web-devicons" })
-	use({ "windwp/nvim-ts-autotag" })
+	use({ "windwp/nvim-ts-autotag", requires = { "nvim-treesitter/nvim-treesitter" } })
 	use({ "windwp/nvim-spectre" })
 	use({
 		"weilbith/nvim-code-action-menu",
@@ -57,7 +58,7 @@ require("packer").startup(function(use)
 	})
 	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
 	use({ "terrortylor/nvim-comment" })
-	use({ "nvim-treesitter/playground" })
+	use({ "nvim-treesitter/playground", requires = { "nvim-treesitter/nvim-treesitter" } })
 	use({ "jcha0713/cmp-tw2css" })
 	use({ "hrsh7th/cmp-omni" })
 	use({ "hrsh7th/cmp-nvim-lsp-document-symbol" })
@@ -70,6 +71,7 @@ require("opts")
 
 require("mason").setup({})
 -- Plugins setup
+require("plugins.treesitter.init")
 require("plugins.telescope.init")
 require("plugins.gitsigns.init")
 require("plugins.lualine.init")
@@ -78,7 +80,6 @@ require("plugins.trouble.init")
 require("plugins.cmp.init")
 require("plugins.spectre.init")
 require("plugins.nvim_tree.init")
-require("plugins.treesitter.init")
 -- Languages setup
 local null_ls = require("null-ls")
 null_ls.setup({
