@@ -27,7 +27,7 @@ vim.keymap.set("n", "<leader>fn", builtin.lsp_definitions, {})
 telescope.load_extension("luasnip")
 telescope.setup({
 	defaults = {
-		file_ignore_patterns = { ".git", "node_modules", "dist" },
+		file_ignore_patterns = { ".git/.+", "node_modules", "dist" },
 		buffer_previewer_maker = new_maker,
 	},
 	pickers = {
