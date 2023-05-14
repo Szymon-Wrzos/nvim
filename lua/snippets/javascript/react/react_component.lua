@@ -15,7 +15,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const {name} = () => {{
-   /* Your function goes here*/
+  {}/* Your function goes here*/
 }};
 {prop_types}
 
@@ -39,6 +39,7 @@ const {name} = () => {{
 					}),
 				})
 			end, { 1 }),
+			i(0),
 		}
 	)
 )
