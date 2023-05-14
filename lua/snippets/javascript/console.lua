@@ -52,7 +52,7 @@ end
 
 local console = sn(
 	"con",
-	fmt([[ console.log("[{function_name}]",{var})]], {
+	fmt([[ console.log("[{function_name}]",{var}{})]], {
 		function_name = d(1, function(args)
 			--- @type string
 			local checked_thing = args[1][1]
@@ -66,6 +66,7 @@ local console = sn(
 			return s(nil, { output })
 		end, { 2 }),
 		var = i(2),
+		i(0),
 	})
 )
 
