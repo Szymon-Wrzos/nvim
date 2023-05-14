@@ -52,17 +52,20 @@ end
 
 local console = sn(
 	"con",
-	fmt([[ console.log("[{function_name}]",{})]], {
-		i(0),
-		function_name = d(1, function()
+	fmt([[ console.log("[{function_name}]",{var})]], {
+		function_name = d(1, function(args)
+			--- @type string
+			local checked_thing = args[1][1]
 			local ts_node = ts.get_node()
 			local function_root = seek_function_root(
 				ts_node,
 				{ "function_declaration", "variable_declarator", "method_definition", "field_definition" }
 			)
 			local data = function_root ~= nil and get_data(function_root) or ""
-			return s(nil, { t(data) })
-		end),
+			local output = checked_thing ~= "" and t(data .. " - " .. checked_thing:gsub('"', "'")) or t(data)
+			return s(nil, { output })
+		end, { 2 }),
+		var = i(2),
 	})
 )
 
