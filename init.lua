@@ -64,6 +64,13 @@ require("packer").startup(function(use)
 	use({ "hrsh7th/cmp-nvim-lsp-document-symbol" })
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 	use("rmehri01/onenord.nvim")
+	use({
+		"jcdickinson/codeium.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp",
+		},
+	})
 end)
 
 require("key_bindings")
@@ -80,6 +87,7 @@ require("plugins.trouble.init")
 require("plugins.cmp.init")
 require("plugins.spectre.init")
 require("plugins.nvim_tree.init")
+require("plugins.codeium.init")
 -- Languages setup
 local null_ls = require("null-ls")
 null_ls.setup({

@@ -25,6 +25,7 @@ cmp.setup({
 				path = "[Path]",
 				buffer = "[Buffer]",
 				["cmp-tw2css"] = "[TW2CSS]",
+				codeium = "[Codeium]",
 			},
 		}),
 	},
@@ -46,6 +47,7 @@ cmp.setup({
 		},
 		{ name = "path", max_item_count = 5 },
 		{ name = "buffer", max_item_count = 5 },
+		{ name = "codeium", max_item_count = 5 },
 	}),
 
 	mapping = cmp.mapping.preset.insert({
