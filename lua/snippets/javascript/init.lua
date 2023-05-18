@@ -1,12 +1,14 @@
 local luasnip = require("luasnip")
 
 local react_component_snippet = require("snippets.javascript.react.react_component")
+local react_context_snippet = require("snippets.javascript.react.react_context")
 local use_state = require("snippets.javascript.react.use_state")
 
 local console = require("snippets.javascript.console")
 
 local react_snippets = {
 	react_component_snippet,
+	react_context_snippet,
 	use_state,
 	console,
 }
