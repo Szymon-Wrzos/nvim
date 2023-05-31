@@ -71,6 +71,13 @@ require("packer").startup(function(use)
 			"hrsh7th/nvim-cmp",
 		},
 	})
+	use({
+		"kdheepak/lazygit.nvim",
+		-- optional for floating window border decoration
+		requires = {
+			"nvim-lua/plenary.nvim",
+		},
+	})
 end)
 
 require("key_bindings")
@@ -113,7 +120,6 @@ require("langs.vue.init")
 require("nvim-web-devicons").setup({})
 require("nvim-ts-autotag").setup()
 
-require("neogit").setup({})
 require("nvim_comment").setup({})
 require("diffview").setup()
 -- Snippets
