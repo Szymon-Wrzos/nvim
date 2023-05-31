@@ -78,6 +78,10 @@ require("packer").startup(function(use)
 			"nvim-lua/plenary.nvim",
 		},
 	})
+	use({
+		"gelguy/wilder.nvim",
+	})
+	use({ "romgrk/fzy-lua-native" })
 end)
 
 require("key_bindings")
@@ -95,6 +99,7 @@ require("plugins.cmp.init")
 require("plugins.spectre.init")
 require("plugins.nvim_tree.init")
 require("plugins.codeium.init")
+-- require("plugins.wilder.init")
 -- Languages setup
 local null_ls = require("null-ls")
 null_ls.setup({
