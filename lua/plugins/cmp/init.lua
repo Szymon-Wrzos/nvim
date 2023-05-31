@@ -9,6 +9,9 @@ end
 local lspkind = require("lspkind")
 
 cmp.setup({
+	performance = {
+		max_view_entries = 20,
+	},
 	formatting = {
 		format = lspkind.cmp_format({
 			mode = "text_symbol", -- show only symbol annotations
