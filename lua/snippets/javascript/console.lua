@@ -52,9 +52,8 @@ end
 
 local console = sn(
 	"con",
-	fmt([[ console.log("[{function_name}]",{})]], {
+	fmt([[ console.log("[{function_name} - {var}]",{var}{})]], {
 		function_name = d(1, function(args)
-			--- @type string
 			local ts_node = ts.get_node()
 			local function_root = seek_function_root(
 				ts_node,
@@ -64,7 +63,10 @@ local console = sn(
 			local output = t(data)
 			return s(nil, { output })
 		end),
+		var = i(2),
 		i(0),
+	}, {
+		repeat_duplicates = true,
 	})
 )
 
