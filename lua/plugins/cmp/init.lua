@@ -68,6 +68,7 @@ cmp.setup({
 				luasnip.expand_or_jump()
 			elseif has_words_before() then
 				cmp.complete()
+				vim.cmd([[LuaSnipUnlinkCurrent<CR>]])
 			else
 				fallback()
 			end
