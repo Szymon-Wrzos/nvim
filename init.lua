@@ -11,16 +11,16 @@ require("packer").startup(function(use)
 	use("neovim/nvim-lspconfig")
 
 	use("b0o/schemastore.nvim")
-	use("hrsh7th/cmp-nvim-lsp")
+	use({ "hrsh7th/cmp-nvim-lsp" })
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
+			{ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-path", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-nvim-lsp-document-symbol", after = "nvim-cmp" },
+			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
+			{ "jcha0713/cmp-tw2css", after = "nvim-cmp" },
 		},
 	})
 	use({
@@ -28,16 +28,13 @@ require("packer").startup(function(use)
 	})
 	use("onsails/lspkind.nvim")
 	use("nvim-lua/plenary.nvim")
-	use("jose-elias-alvarez/null-ls.nvim")
 	use("lukas-reineke/lsp-format.nvim")
+	use("jose-elias-alvarez/null-ls.nvim")
 	use("jay-babu/mason-null-ls.nvim")
 	use("nvim-telescope/telescope.nvim")
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
-	})
-	use({
-		"benfowler/telescope-luasnip.nvim",
 	})
 	use({
 		"lewis6991/gitsigns.nvim",
@@ -58,23 +55,12 @@ require("packer").startup(function(use)
 	})
 	use({ "terrortylor/nvim-comment" })
 	use({ "nvim-treesitter/playground", requires = { "nvim-treesitter/nvim-treesitter" } })
-	use({ "jcha0713/cmp-tw2css" })
-	use({ "hrsh7th/cmp-omni" })
-	use({ "hrsh7th/cmp-nvim-lsp-document-symbol" })
 	use("rmehri01/onenord.nvim")
 	use({
 		"jcdickinson/codeium.nvim",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"hrsh7th/nvim-cmp",
-		},
 	})
 	use({
 		"kdheepak/lazygit.nvim",
-		-- optional for floating window border decoration
-		requires = {
-			"nvim-lua/plenary.nvim",
-		},
 	})
 	use({
 		"gelguy/wilder.nvim",
