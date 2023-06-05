@@ -39,18 +39,21 @@ cmp.setup({
 		end,
 	},
 	sources = cmp.config.sources({
-		{ name = "luasnip", max_item_count = 5 },
-		{ name = "cmp-tw2css", max_item_count = 5 },
+		{ name = "luasnip" },
+		{ name = "cmp-tw2css" },
 		{
 			name = "nvim_lsp",
-			max_item_count = 10,
+
 			entry_filter = function(entry)
 				return require("cmp").lsp.CompletionItemKind.Snippet ~= entry:get_kind()
 			end,
 		},
-		{ name = "path", max_item_count = 5 },
-		{ name = "buffer", max_item_count = 5 },
-		{ name = "codeium", max_item_count = 5 },
+		{
+			name = "nvim_lua",
+		},
+		{ name = "path" },
+		{ name = "buffer" },
+		{ name = "codeium" },
 	}),
 
 	mapping = cmp.mapping.preset.insert({
