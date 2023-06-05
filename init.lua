@@ -56,7 +56,6 @@ require("packer").startup(function(use)
 		"weilbith/nvim-code-action-menu",
 		cmd = "CodeActionMenu",
 	})
-	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
 	use({ "terrortylor/nvim-comment" })
 	use({ "nvim-treesitter/playground", requires = { "nvim-treesitter/nvim-treesitter" } })
 	use({ "jcha0713/cmp-tw2css" })
