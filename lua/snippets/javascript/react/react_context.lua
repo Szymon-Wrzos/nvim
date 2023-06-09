@@ -18,7 +18,7 @@ local react_boilerplate = sn(
   import React, {{ createContext }} from 'react';
   import PropTypes from 'prop-types';
 
-   {js_doc}
+  {js_doc}
   export const {context_name}Context{ts_type} = createContext();
   
   const {context_name}Provider = ({{ children }}) => {{
@@ -36,19 +36,20 @@ local react_boilerplate = sn(
 			js_doc = d(1, function(args)
 				local is_file_typescript = string.find(vim.bo.filetype, "typescript")
 				if is_file_typescript then
-					return ""
+					return s(nil, t(""))
 				end
-				return s(nil, t({ "/**", "* @type { React.Context<any> }", "*/" }))
+				return s(nil, t({ "/**", " * @type { React.Context<any> }", " */" }))
 			end),
-			ts_type = f(function(args)
+			ts_type = d(2, function(args)
 				local is_file_typescript = string.find(vim.bo.filetype, "typescript")
+				vim.print(is_file_typescript)
 				if not is_file_typescript then
-					return ""
+					return s(nil, t(""))
 				end
-				return ":React.Context<any>"
+				return s(nil, t(": React.Context<any>"))
 			end),
-			context_name = i(2, "Context"),
-			export_method = d(3, function(args)
+			context_name = i(3, "Context"),
+			export_method = d(4, function(args)
 				local component_name = args[1][1]
 				return s(nil, {
 					c(1, {
@@ -56,7 +57,7 @@ local react_boilerplate = sn(
 						i(2, "export { " .. component_name .. "Provider }"),
 					}),
 				})
-			end, { 2 }),
+			end, { 3 }),
 			i(0),
 		},
 		{
