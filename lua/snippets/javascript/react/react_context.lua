@@ -39,7 +39,18 @@ local react_boilerplate = sn(
 				if is_file_typescript then
 					return s(nil, t({ "type " .. component_name .. "ContextProps = {}", "" }))
 				end
-				return s(nil, t({ "/**", " * @type { React.Context<any> }", " */" }))
+				return s(
+					nil,
+					t({
+						"/**",
+						" * @typedef {Object} props",
+						" * @property {}",
+						" */",
+						"/**",
+						" * @type { React.Context<props> }",
+						" */",
+					})
+				)
 			end, { 3 }),
 			ts_type = d(2, function(args)
 				local component_name = args[1][1]
