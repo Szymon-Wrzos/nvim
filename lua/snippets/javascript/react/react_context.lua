@@ -42,7 +42,6 @@ local react_boilerplate = sn(
 			end),
 			ts_type = d(2, function(args)
 				local is_file_typescript = string.find(vim.bo.filetype, "typescript")
-				vim.print(is_file_typescript)
 				if not is_file_typescript then
 					return s(nil, t(""))
 				end
