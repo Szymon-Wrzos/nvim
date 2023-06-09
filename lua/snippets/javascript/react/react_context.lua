@@ -34,19 +34,21 @@ local react_boilerplate = sn(
 ]],
 		{
 			js_doc = d(1, function(args)
+				local component_name = args[1][1]
 				local is_file_typescript = string.find(vim.bo.filetype, "typescript")
 				if is_file_typescript then
-					return s(nil, t(""))
+					return s(nil, t({ "type " .. component_name .. "ContextProps = {}", "" }))
 				end
 				return s(nil, t({ "/**", " * @type { React.Context<any> }", " */" }))
-			end),
+			end, { 3 }),
 			ts_type = d(2, function(args)
+				local component_name = args[1][1]
 				local is_file_typescript = string.find(vim.bo.filetype, "typescript")
 				if not is_file_typescript then
 					return s(nil, t(""))
 				end
-				return s(nil, t(": React.Context<any>"))
-			end),
+				return s(nil, t(": React.Context<" .. component_name .. "ContextProps>"))
+			end, { 3 }),
 			context_name = i(3, "Context"),
 			export_method = d(4, function(args)
 				local component_name = args[1][1]
