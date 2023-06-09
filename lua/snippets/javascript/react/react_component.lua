@@ -13,7 +13,14 @@ local react_boilerplate = sn(
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const {name} = () => {{
+/**
+  * @typedef {{Object}} props 
+  *
+  */
+/** 
+  * @param {{props}} props
+  */ 
+const {name} = ({{}}) => {{
   {}/* Your function goes here*/
 }};
 {name}.propTypes = {{}}
