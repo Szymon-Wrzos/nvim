@@ -66,6 +66,8 @@ require("packer").startup(function(use)
 		"wookayin/wilder.nvim", -- This fork contains fix for completion command line -- Keep track on main repo
 	})
 	use({ "romgrk/fzy-lua-native" })
+	use("mfussenegger/nvim-dap")
+	use("jay-babu/mason-nvim-dap.nvim")
 end)
 
 require("key_bindings")

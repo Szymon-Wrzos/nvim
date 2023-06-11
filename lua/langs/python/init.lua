@@ -13,6 +13,10 @@ require("mason-null-ls").setup({
 	automatic_installation = true,
 })
 
+require("mason-nvim-dap").setup({
+	ensure_installed = { "python" },
+	automatic_installation = true,
+})
 require("lspconfig")["pyright"].setup({})
 
 local null_ls = require("null-ls")
