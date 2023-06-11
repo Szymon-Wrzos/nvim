@@ -66,6 +66,9 @@ require("packer").startup(function(use)
 		"wookayin/wilder.nvim", -- This fork contains fix for completion command line -- Keep track on main repo
 	})
 	use({ "romgrk/fzy-lua-native" })
+	use("mfussenegger/nvim-dap")
+	use("jay-babu/mason-nvim-dap.nvim")
+	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 end)
 
 require("key_bindings")
@@ -84,7 +87,7 @@ require("plugins.spectre.init")
 require("plugins.nvim_tree.init")
 require("plugins.codeium.init")
 require("plugins.wilder.init")
--- require("plugins.wilder.init")
+require("plugins.dap.init")
 -- Languages setup
 local null_ls = require("null-ls")
 null_ls.setup({
