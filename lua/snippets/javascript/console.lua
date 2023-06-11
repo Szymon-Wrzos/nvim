@@ -52,21 +52,21 @@ end
 
 local console = sn(
 	"con",
-	fmt([[ console.log("[{function_name} - {var}]",{var}{})]], {
+	fmt([[ console.log("[{function_name}]",{var}{})]], {
 		function_name = d(1, function(args)
+			local checked_value = args[1][1]
+
 			local ts_node = ts.get_node()
 			local function_root = seek_function_root(
 				ts_node,
 				{ "function_declaration", "variable_declarator", "method_definition", "field_definition" }
 			)
 			local data = function_root ~= nil and get_data(function_root) or ""
-			local output = t(data)
+			local output = checked_value ~= "" and t(data .. " - " .. checked_value) or t(data)
 			return s(nil, { output })
-		end),
+		end, { 2 }),
 		var = i(2),
 		i(0),
-	}, {
-		repeat_duplicates = true,
 	})
 )
 

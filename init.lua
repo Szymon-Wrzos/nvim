@@ -63,7 +63,7 @@ require("packer").startup(function(use)
 		"kdheepak/lazygit.nvim",
 	})
 	use({
-		"gelguy/wilder.nvim",
+		"wookayin/wilder.nvim", -- This fork contains fix for completion command line -- Keep track on main repo
 	})
 	use({ "romgrk/fzy-lua-native" })
 end)
