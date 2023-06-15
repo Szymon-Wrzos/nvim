@@ -26,6 +26,7 @@ require("packer").startup(function(use)
 	use({
 		"L3MON4D3/LuaSnip",
 	})
+	use("jose-elias-alvarez/typescript.nvim")
 	use("onsails/lspkind.nvim")
 	use("nvim-lua/plenary.nvim")
 	use("lukas-reineke/lsp-format.nvim")
@@ -109,6 +110,7 @@ require("langs.yaml.init")
 require("langs.markdown.init")
 require("langs.graphql.init")
 require("langs.vue.init")
+require("langs.sh.init")
 
 require("nvim-web-devicons").setup({})
 require("nvim-ts-autotag").setup()
