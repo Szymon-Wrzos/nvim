@@ -29,7 +29,7 @@ end
 -- TODO: This has potential to work in other langauges - just dehardcode it someday
 local function get_data(node)
 	local filetype = vim.bo.filetype
-	local query_lang = filetype == "javascriptreact" and "jsx" or filetype
+	local query_lang = (filetype == "javascriptreact" or filetype == "typescriptreact") and "tsx" or filetype
 	if node == nil then
 		return nil
 	end
@@ -54,9 +54,13 @@ local console = sn(
 	"con",
 	fmt([[ console.log("[{function_name}]",{var})]], {
 		function_name = d(1, function(args)
+			local bufnr = 0
+			local parser = vim.treesitter.get_parser(bufnr, "tsx")
 			local checked_value = args[1][1]
-
-			local ts_node = ts.get_node()
+			local lineNum = vim.api.nvim_win_get_cursor(0)
+			local row = lineNum[1]
+			local col = lineNum[2]
+			local ts_node = parser:named_node_for_range({ row, col, row, col })
 			local function_root = seek_function_root(
 				ts_node,
 				{ "function_declaration", "variable_declarator", "method_definition", "field_definition" }
