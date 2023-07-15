@@ -5,8 +5,60 @@ local t = luasnip.text_node
 local s = luasnip.snippet_node
 local d = luasnip.dynamic_node
 local fmt = require("luasnip.extras.fmt").fmt
+--- @type TreesitterModule
 local ts = vim.treesitter
 local ts_query = ts.query
+
+local function get_query_data()
+	local filetype = vim.bo.filetype
+	local query_data = {
+		["variable_declarator"] = {
+			["identifier"] = "@name",
+		},
+		["function_declaration"] = {
+			["identifier"] = "@name",
+		},
+		["method_definition"] = {
+			["property_identifier"] = "@name",
+			["private_property_identifier"] = "@name",
+		},
+	}
+
+	if filetype == "typescript" or filetype == "typescriptreact" then
+		local typescript_query_data = {
+			["public_field_definition"] = {
+				["property_identifier"] = "@name",
+				["private_property_identifier"] = "@name",
+			},
+		}
+		for key, data in pairs(typescript_query_data) do
+			query_data[key] = data
+		end
+	elseif filetype == "javascript" or filetype == "javascriptreact" then
+		local javascript_query_data = {
+			["field_definition"] = {
+				["property_identifier"] = "@name",
+			},
+		}
+		for key, data in pairs(javascript_query_data) do
+			if not data[key] then
+				query_data[key] = data
+			else
+			end
+		end
+	end
+
+	--- @type string[]
+	local breakpoints = {}
+	local full_query = [[]]
+	for key, val in pairs(query_data) do
+		table.insert(breakpoints, key)
+		for inner_key, inner_val in pairs(val) do
+			full_query = full_query .. "(" .. key .. " (" .. inner_key .. ") " .. inner_val .. ")\n"
+		end
+	end
+	return breakpoints, full_query
+end
 
 --- @param node TSNode | nil
 --- @param ts_elements table<string>
@@ -28,8 +80,6 @@ end
 --- @param node TSNode | nil
 -- TODO: This has potential to work in other langauges - just dehardcode it someday
 local function get_data(node)
-	local filetype = vim.bo.filetype
-	local query_lang = (filetype == "javascriptreact" or filetype == "typescriptreact") and "tsx" or filetype
 	if node == nil then
 		return nil
 	end
@@ -37,14 +87,9 @@ local function get_data(node)
 	if node_type == "program" then
 		return "global"
 	end
-	local query_str = [[
-    (variable_declarator (identifier) @name)
-    (function_declaration (identifier) @name)
-    (method_definition (property_identifier) @name)
-    (field_definition (property_identifier) @name)
-]]
-	local parsed_query = ts_query.parse(query_lang, query_str)
-	-- print("[get_data]")
+	local breakpoints, full_query = get_query_data()
+	vim.print(full_query)
+	local parsed_query = ts_query.parse(vim.bo.filetype, full_query)
 	for _, parsed_node, _ in parsed_query:iter_captures(node, 0, node:start(), node:end_()) do
 		return ts.get_node_text(parsed_node, 0)
 	end
@@ -54,17 +99,11 @@ local console = sn(
 	"con",
 	fmt([[ console.log("[{function_name}]",{var})]], {
 		function_name = d(1, function(args)
-			local bufnr = 0
-			local parser = vim.treesitter.get_parser(bufnr, "tsx")
 			local checked_value = args[1][1]
-			local lineNum = vim.api.nvim_win_get_cursor(0)
-			local row = lineNum[1]
-			local col = lineNum[2]
-			local ts_node = parser:named_node_for_range({ row, col, row, col })
-			local function_root = seek_function_root(
-				ts_node,
-				{ "function_declaration", "variable_declarator", "method_definition", "field_definition" }
-			)
+			local ts_node = ts.get_node()
+
+			local breakpoints, full_query = get_query_data()
+			local function_root = seek_function_root(ts_node, breakpoints)
 			local data = function_root ~= nil and get_data(function_root) or ""
 			local output = checked_value ~= "" and t(data .. " - " .. checked_value) or t(data)
 			return s(nil, { output })
