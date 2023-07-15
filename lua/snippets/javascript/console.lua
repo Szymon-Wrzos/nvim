@@ -5,7 +5,6 @@ local t = luasnip.text_node
 local s = luasnip.snippet_node
 local d = luasnip.dynamic_node
 local fmt = require("luasnip.extras.fmt").fmt
-
 --- @type TreesitterModule
 local ts = vim.treesitter
 local ts_query = ts.query
@@ -55,7 +54,7 @@ local function get_query_data()
 			full_query = full_query .. "(" .. key .. " (" .. inner_key .. ") " .. inner_val .. ")\n"
 		end
 	end
-	return table.pack(breakpoints, full_query)
+	return breakpoints, full_query
 end
 
 --- @param node TSNode | nil
@@ -85,8 +84,7 @@ local function get_data(node)
 	if node_type == "program" then
 		return "global"
 	end
-	local full_query = get_query_data()[2]
-	vim.print(full_query)
+	local breakpoints, full_query = get_query_data()
 	local parsed_query = ts_query.parse(vim.bo.filetype, full_query)
 	for _, parsed_node, _ in parsed_query:iter_captures(node, 0, node:start(), node:end_()) do
 		return ts.get_node_text(parsed_node, 0)
@@ -100,7 +98,7 @@ local console = sn(
 			local checked_value = args[1][1]
 			local ts_node = ts.get_node()
 
-			local breakpoints = get_query_data()[1]
+			local breakpoints, full_query = get_query_data()
 			local function_root = seek_function_root(ts_node, breakpoints)
 			local data = function_root ~= nil and get_data(function_root) or ""
 			local output = checked_value ~= "" and t(data .. " - " .. checked_value) or t(data)
