@@ -9,6 +9,10 @@ local fmt = require("luasnip.extras.fmt").fmt
 local ts = vim.treesitter
 local ts_query = ts.query
 
+local function all_trim(str)
+	return str:match("^%s*(.-)%s*$")
+end
+
 local function get_query_data()
 	local filetype = vim.bo.filetype
 	local query_data = {
@@ -84,7 +88,7 @@ local function get_data(node)
 	if node_type == "program" then
 		return "global"
 	end
-	local breakpoints, full_query = get_query_data()
+	local _, full_query = get_query_data()
 	local parsed_query = ts_query.parse(vim.bo.filetype, full_query)
 	for _, parsed_node, _ in parsed_query:iter_captures(node, 0, node:start(), node:end_()) do
 		return ts.get_node_text(parsed_node, 0)
@@ -95,10 +99,10 @@ local console = sn(
 	"con",
 	fmt([[ console.log("[{function_name}]",{var})]], {
 		function_name = d(1, function(args)
-			local checked_value = args[1][1]
+			local checked_value = all_trim(args[1][1])
 			local ts_node = ts.get_node()
 
-			local breakpoints, full_query = get_query_data()
+			local breakpoints, _ = get_query_data()
 			local function_root = seek_function_root(ts_node, breakpoints)
 			local data = function_root ~= nil and get_data(function_root) or ""
 			local output = checked_value ~= "" and t(data .. " - " .. checked_value) or t(data)
