@@ -10,10 +10,23 @@ local react_snippets = {
 	react_component_snippet,
 	react_context_snippet,
 	use_state,
+}
+
+local js_snippets = {}
+
+local ts_based_snippets = {
 	console,
 }
 
+for key, val in pairs(react_snippets) do
+	js_snippets[key] = val
+end
+
+for key, val in pairs(ts_based_snippets) do
+	js_snippets[key] = val
+end
+
 luasnip.add_snippets("typescriptreact", react_snippets)
 luasnip.add_snippets("javascriptreact", react_snippets)
-luasnip.add_snippets("javascript", react_snippets)
-luasnip.add_snippets("typescript", react_snippets)
+luasnip.add_snippets("javascript", js_snippets)
+luasnip.add_snippets("typescript", js_snippets)
