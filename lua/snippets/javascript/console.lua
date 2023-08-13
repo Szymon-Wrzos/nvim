@@ -92,7 +92,6 @@ local function get_data(node)
 		return nil
 	end
 	local node_type = node:type()
-	vim.print(node_type)
 	if node_type == "program" then
 		return "global"
 	end
