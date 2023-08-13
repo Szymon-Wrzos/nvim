@@ -31,7 +31,9 @@ local create_printing_snippet = function(language, format, query, breakpoints, p
 			return nil
 		end
 		local node_type = node:type()
-		if vim.tbl_contains(ts_elements, node_type) or node_type == "program" then
+
+		vim.print("", node_type)
+		if vim.tbl_contains(ts_elements, node_type) or node_type == "program" or node_type == "chunk" then
 			return node
 		end
 
@@ -46,7 +48,8 @@ local create_printing_snippet = function(language, format, query, breakpoints, p
 			return nil
 		end
 		local node_type = node:type()
-		if node_type == "program" then
+		vim.print("", node_type)
+		if node_type == "program" or node_type == "chunk" then
 			return "global"
 		end
 		local parsed_query = ts_query.parse(parser_name or language, query)
