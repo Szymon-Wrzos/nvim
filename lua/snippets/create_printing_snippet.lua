@@ -42,7 +42,6 @@ local create_printing_snippet = function(language, format, query, breakpoints, p
 	end
 
 	--- @param node TSNode | nil
-	-- TODO: This has potential to work in other langauges - just dehardcode it someday
 	local function get_node_text(node)
 		if node == nil then
 			return nil
@@ -56,6 +55,7 @@ local create_printing_snippet = function(language, format, query, breakpoints, p
 			return ts.get_node_text(parsed_node, 0)
 		end
 	end
+
 	local console = sn(
 		"con",
 		fmt(format, {
