@@ -11,7 +11,6 @@ local ts_query = ts.query
 
 --- Function for creating printing snippet for luasnip
 --- In idea, snippet prints printing function for language with name of function in the nearest scope
----- testing [opt]
 --- @param language string
 --- @param format string - format string, should contain {function_name} and {var}. Example:
 ---```lua
