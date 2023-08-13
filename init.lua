@@ -9,7 +9,6 @@ require("packer").startup(function(use)
 	use("williamboman/mason.nvim")
 	use("williamboman/mason-lspconfig.nvim")
 	use("neovim/nvim-lspconfig")
-
 	use("b0o/schemastore.nvim")
 	use({ "hrsh7th/cmp-nvim-lsp" })
 	use({
@@ -70,6 +69,19 @@ require("packer").startup(function(use)
 	use("mfussenegger/nvim-dap")
 	use("jay-babu/mason-nvim-dap.nvim")
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+	use("echasnovski/mini.cursorword")
+	use({
+		"folke/which-key.nvim",
+		config = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+			require("which-key").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	})
 end)
 
 require("key_bindings")
@@ -122,3 +134,4 @@ require("snippets.javascript.init")
 require("snippets.css.init")
 
 require("plugins.colorscheme.init")
+require("mini.cursorword").setup()
