@@ -10,6 +10,7 @@ local react_snippets = {
 	react_component_snippet,
 	react_context_snippet,
 	use_state,
+	console,
 }
 
 local js_snippets = {}
