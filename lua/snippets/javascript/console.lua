@@ -9,6 +9,13 @@ local fmt = require("luasnip.extras.fmt").fmt
 local ts = vim.treesitter
 local ts_query = ts.query
 
+local mappings = {
+	["javascript"] = "javascript",
+	["javascriptreact"] = "javascript",
+	["typescript"] = "typescript",
+	["typescriptreact"] = "tsx",
+}
+
 local function all_trim(str)
 	return str:match("^%s*(.-)%s*$")
 end
@@ -85,11 +92,12 @@ local function get_data(node)
 		return nil
 	end
 	local node_type = node:type()
+	vim.print(node_type)
 	if node_type == "program" then
 		return "global"
 	end
 	local _, full_query = get_query_data()
-	local parsed_query = ts_query.parse(vim.bo.filetype, full_query)
+	local parsed_query = ts_query.parse(mappings[vim.bo.filetype], full_query)
 	for _, parsed_node, _ in parsed_query:iter_captures(node, 0, node:start(), node:end_()) do
 		return ts.get_node_text(parsed_node, 0)
 	end
@@ -98,10 +106,16 @@ end
 local console = sn(
 	"con",
 	fmt([[ console.log("[{function_name}]",{var})]], {
-		function_name = d(1, function(args)
-			local checked_value = all_trim(args[1][1])
-			local ts_node = ts.get_node()
+		function_name = d(1, function(args, snip)
+			local pos_begin = snip.nodes[6].mark:pos_begin()
+			local pos_end = snip.nodes[6].mark:pos_end()
+			local parser = vim.treesitter.get_parser(0, mappings[vim.bo.filetype])
+			local tstree = parser:parse()
 
+			local ts_node =
+				tstree[1]:root():named_descendant_for_range(pos_begin[1], pos_begin[2], pos_end[1], pos_end[2])
+
+			local checked_value = all_trim(args[1][1])
 			local breakpoints, _ = get_query_data()
 			local function_root = seek_function_root(ts_node, breakpoints)
 			local data = function_root ~= nil and get_data(function_root) or ""
