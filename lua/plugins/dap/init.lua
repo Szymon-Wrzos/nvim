@@ -11,6 +11,6 @@ dap.listeners.before.event_exited["dapui_config"] = function()
 	dapui.close()
 end
 
-vim.keymap.set({ "n" }, "<leader>bf", dap.toggle_breakpoint)
-vim.keymap.set({ "n" }, "<leader>bc", dap.continue)
-vim.keymap.set({ "n" }, "<leader>bg", dap.terminate)
+vim.keymap.set({ "n" }, "<leader>bf", dap.toggle_breakpoint, { desc = "Toggle debug [b]reakpoint" })
+vim.keymap.set({ "n" }, "<leader>bc", dap.continue, { desc = "De[b]ug [c]ontinue" })
+vim.keymap.set({ "n" }, "<leader>bg", dap.terminate, { desc = "De[b]ug terminate" })
