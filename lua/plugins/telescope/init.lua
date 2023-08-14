@@ -19,12 +19,12 @@ local new_maker = function(filepath, bufnr, opts)
 	end)
 end
 
-vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
-vim.keymap.set("n", "<leader>fj", builtin.lsp_references, {})
-vim.keymap.set("n", "<leader>fn", builtin.lsp_definitions, {})
+vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [f]iles" })
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind [g]reps" })
+vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind [b]uffers" })
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [h]elp" })
+vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "[F]ind [r]eferences" })
+vim.keymap.set("n", "<leader>fn", builtin.lsp_definitions, { desc = "[F]ind defi[n]itions" })
 telescope.setup({
 	defaults = {
 		file_ignore_patterns = { ".git/.+", "node_modules", "dist" },
