@@ -34,7 +34,6 @@ local create_printing_snippet = function(param)
 		end
 		local node_type = node:type()
 
-		vim.print("", node_type)
 		if vim.tbl_contains(ts_elements, node_type) or node_type == "program" or node_type == "chunk" then
 			return node
 		end
