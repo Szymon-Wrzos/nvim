@@ -16,6 +16,14 @@ local breakpoints = {
 	"method_definition",
 }
 
-local snippet = create_snippet("typescriptreact", [[console.log("{function_name}","{var}")]], query, breakpoints, "tsx")
+local format = [[console.log("[{function_name}]", {var})]]
+
+local snippet = create_snippet({
+	language = "typescriptreact",
+	format = format,
+	query = query,
+	breakpoints = breakpoints,
+	parser_name = "tsx",
+})
 
 return snippet

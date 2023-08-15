@@ -16,6 +16,13 @@ local breakpoints = {
 	"method_definition",
 }
 
-local snippet = create_snippet("typescript", [[console.log("{function_name}","{var}")]], query, breakpoints)
+local format = [[console.log("[{function_name}]", {var})]]
+
+local snippet = create_snippet({
+	language = "typescript",
+	format = format,
+	query = query,
+	breakpoints = breakpoints,
+})
 
 return snippet

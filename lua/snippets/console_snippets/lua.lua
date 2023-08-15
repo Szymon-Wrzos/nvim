@@ -26,6 +26,11 @@ else
 	format = [[print("{function_name}", {var})]]
 end
 
-local snippet = create_snippet("lua", format, query, breakpoints)
+local snippet = create_snippet({
+	language = "lua",
+	format = format,
+	query = query,
+	breakpoints = breakpoints,
+})
 
 return snippet
