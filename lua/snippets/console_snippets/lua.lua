@@ -30,6 +30,7 @@ local snippet = create_snippet({
 	format = format,
 	query = query,
 	breakpoints = breakpoints,
+	program_node_name = "chunk",
 })
 
 return snippet

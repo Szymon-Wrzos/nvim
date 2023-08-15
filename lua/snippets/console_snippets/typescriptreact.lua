@@ -24,6 +24,7 @@ local snippet = create_snippet({
 	query = query,
 	breakpoints = breakpoints,
 	parser_name = "tsx",
+	program_node_name = "program",
 })
 
 return snippet
