@@ -75,11 +75,6 @@ require("packer").startup(function(use)
 		config = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
-			require("which-key").setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
 		end,
 	})
 end)
@@ -101,6 +96,7 @@ require("plugins.nvim_tree.init")
 require("plugins.codeium.init")
 require("plugins.wilder.init")
 require("plugins.dap.init")
+require("plugins.which_key.init")
 -- Languages setup
 local null_ls = require("null-ls")
 null_ls.setup({
