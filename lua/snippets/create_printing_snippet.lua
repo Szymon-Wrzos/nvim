@@ -17,7 +17,9 @@ local ts_query = ts.query
 ---```
 --- @field query string - treesitter query for fetching function name
 --- @field breakpoints string[] - breakpoints for treesitter when it should check nearest function name in scope
---- @field parser_name string | nil - treesitter parser name. Exists due to crashes for jsx and tsx files.
+--- @field parser_name string | nil - default: `language param` - optional treesitter parser name. Exists due to crashes for jsx and tsx files.
+--- @field program_node_name string - treesitter node name of program (ex. for JS - "program", for Lua - "chunk")
+--- @field trigger string | nil - default: "con" -trigger name of snippet
 
 --- Function for creating printing snippet for luasnip
 --- In idea, snippet prints printing function for language with name of function in the nearest scope
@@ -33,8 +35,8 @@ local create_printing_snippet = function(param)
 			return nil
 		end
 		local node_type = node:type()
-
-		if vim.tbl_contains(ts_elements, node_type) or node_type == "program" or node_type == "chunk" then
+		vim.print("[seek_function_root - node_type]", node_type)
+		if vim.tbl_contains(ts_elements, node_type) or node_type == param.program_node_name then
 			return node
 		end
 
@@ -49,7 +51,8 @@ local create_printing_snippet = function(param)
 			return nil
 		end
 		local node_type = node:type()
-		if node_type == "program" or node_type == "chunk" then
+		vim.print("[get_node_text - node_type]", node_type)
+		if node_type == param.program_node_name then
 			return "global"
 		end
 		local parsed_query = ts_query.parse(param.parser_name or param.language, param.query)
@@ -59,17 +62,16 @@ local create_printing_snippet = function(param)
 	end
 
 	local console = sn(
-		"con",
+		param.trigger or "con",
 		fmt(param.format, {
 			function_name = d(1, function(args, snip)
-				local pos_begin = snip.nodes[6].mark:pos_begin()
-				local pos_end = snip.nodes[6].mark:pos_end()
+				local pos_begin = snip.nodes[1].mark:pos_begin()
+				local pos_end = snip.nodes[1].mark:pos_end()
 				local parser = vim.treesitter.get_parser(0, param.parser_name or param.language)
 				local tstree = parser:parse()
 
 				local ts_node =
 					tstree[1]:root():named_descendant_for_range(pos_begin[1], pos_begin[2], pos_end[1], pos_end[2])
-
 				local checked_value = all_trim(args[1][1])
 				local function_root = seek_function_root(ts_node, param.breakpoints)
 				local data = function_root ~= nil and get_node_text(function_root) or ""
