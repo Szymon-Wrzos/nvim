@@ -48,7 +48,6 @@ local create_printing_snippet = function(language, format, query, breakpoints, p
 			return nil
 		end
 		local node_type = node:type()
-		vim.print("", node_type)
 		if node_type == "program" or node_type == "chunk" then
 			return "global"
 		end
