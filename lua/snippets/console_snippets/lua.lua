@@ -20,9 +20,9 @@ local path_to_dir = vim.fn.getcwd()
 
 local format = ""
 if path_to_dir:find(".config/nvim") ~= nil then
-	format = [[vim.print("{function_name}", {var})]]
+	format = [[vim.print("[{function_name}]", {var})]]
 else
-	format = [[print("{function_name}", {var})]]
+	format = [[print("[{function_name}]", {var})]]
 end
 
 local snippet = create_snippet({
