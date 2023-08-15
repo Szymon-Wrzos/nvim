@@ -15,12 +15,11 @@ local breakpoints = {
 	"function_declaration",
 }
 
-local path = require("plenary.path")
 --- @type string
-local path_to_dir = path:new():parents()[1]
+local path_to_dir = vim.fn.getcwd()
 
 local format = ""
-if path_to_dir:find(".config") ~= nil then
+if path_to_dir:find(".config/nvim") ~= nil then
 	format = [[vim.print("{function_name}", {var})]]
 else
 	format = [[print("{function_name}", {var})]]
