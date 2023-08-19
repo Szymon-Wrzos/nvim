@@ -10,6 +10,9 @@ require("packer").startup(function(use)
 	use("williamboman/mason-lspconfig.nvim")
 	use("neovim/nvim-lspconfig")
 	use("b0o/schemastore.nvim")
+	use({ "ggandor/leap.nvim", requires = {
+		"tpope/vim-repeat",
+	} })
 	use({ "hrsh7th/cmp-nvim-lsp" })
 	use({
 		"hrsh7th/nvim-cmp",
@@ -121,13 +124,17 @@ require("langs.vue.init")
 require("langs.sh.init")
 require("langs.dockerfile.init")
 
-require("nvim-web-devicons").setup({})
-require("nvim-ts-autotag").setup()
-
-require("nvim_comment").setup({})
 -- Snippets
 require("snippets.javascript.init")
 require("snippets.css.init")
 
 require("plugins.colorscheme.init")
+
 require("mini.cursorword").setup()
+
+require("nvim-web-devicons").setup({})
+require("nvim-ts-autotag").setup()
+
+require("nvim_comment").setup({})
+
+require('leap').add_default_mappings() 
