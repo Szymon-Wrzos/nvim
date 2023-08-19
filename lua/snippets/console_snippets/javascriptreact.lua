@@ -1,15 +1,15 @@
 local create_snippet = require("snippets.create_printing_snippet")
 
 local query = [[
-(field_definition (property_identifier) @name)
-(function_declaration (identifier) @name)
+(field_definition (property_identifier) @name (#set! "fetch_last" "true"))
+(function_declaration (identifier) @name (#set! "fetch_last" "true"))
 (variable_declarator (identifier) @name)
 (method_definition (private_property_identifier) @name)
 (method_definition (property_identifier) @name)
 ]]
 
 local breakpoints = {
-	"public_field_definition",
+	"field_definition",
 	"function_declaration",
 	"variable_declarator",
 	"method_definition",

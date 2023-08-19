@@ -7,6 +7,7 @@ local d = luasnip.dynamic_node
 local fmt = require("luasnip.extras.fmt").fmt
 --- @type TreesitterModule
 local ts = vim.treesitter
+
 local ts_query = ts.query
 
 --- @class create_snippet_param
@@ -35,7 +36,6 @@ local create_printing_snippet = function(param)
 			return nil
 		end
 		local node_type = node:type()
-		vim.print("[seek_function_root - node_type]", node_type)
 		if vim.tbl_contains(ts_elements, node_type) or node_type == param.program_node_name then
 			return node
 		end
@@ -51,14 +51,35 @@ local create_printing_snippet = function(param)
 			return nil
 		end
 		local node_type = node:type()
-		vim.print("[get_node_text - node_type]", node_type)
 		if node_type == param.program_node_name then
 			return "global"
 		end
 		local parsed_query = ts_query.parse(param.parser_name or param.language, param.query)
-		for _, parsed_node, _ in parsed_query:iter_captures(node, 0, node:start(), node:end_()) do
-			return ts.get_node_text(parsed_node, 0)
+		local capture_amount = #parsed_query.captures
+		local captures = parsed_query:iter_captures(node, 0, node:start(), node:end_())
+		local final_text = ""
+
+		local query_data = {}
+		local query_metadata = {}
+		for _, parsed_node, metadata in captures do
+			local text = ts.get_node_text(parsed_node, 0)
+			for key, val in pairs(metadata) do
+				query_metadata[key] = val
+			end
+			if text == nil then
+				return
+			end
+			table.insert(query_data, { ["text"] = text })
 		end
+
+		for index, value in ipairs(query_data) do
+			if query_metadata.fetch_last == "true" and index == capture_amount then
+				return value.text
+			end
+
+			final_text = capture_amount + 1 == index and (value.text .. " - " .. final_text) or value.text
+		end
+		return final_text
 	end
 
 	local console = sn(
@@ -69,7 +90,6 @@ local create_printing_snippet = function(param)
 				local pos_end = snip.nodes[1].mark:pos_end()
 				local parser = vim.treesitter.get_parser(0, param.parser_name or param.language)
 				local tstree = parser:parse()
-
 				local ts_node =
 					tstree[1]:root():named_descendant_for_range(pos_begin[1], pos_begin[2], pos_end[1], pos_end[2])
 				local checked_value = all_trim(args[1][1])

@@ -1,16 +1,21 @@
 local create_snippet = require("snippets.create_printing_snippet")
 
 local query = [[
+(
+ field (identifier) @name
+ (function_call (identifier) @name (arguments (function_definition)))
+)
 ( 
   assignment_statement (
     (variable_list (identifier) @name)
     (expression_list (function_definition))
   )
 )
-(function_declaration (identifier) @name)
+(function_declaration (identifier) @name (#set! "fetch_last" "true"))
 ]]
 
 local breakpoints = {
+	"field",
 	"assignment_statement",
 	"function_declaration",
 }
