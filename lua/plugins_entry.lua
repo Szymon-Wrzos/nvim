@@ -210,6 +210,7 @@ require("lazy").setup({
 
 	{
 		"folke/trouble.nvim",
+		event = "VeryLazy",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("plugins.trouble.init").init()
