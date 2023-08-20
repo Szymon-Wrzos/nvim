@@ -39,7 +39,7 @@ require("lazy").setup({
 		build = function()
 			vim.cmd([[:TSUpdate<CR>]])
 		end,
-		event = "BufEnter",
+		event = "VeryLazy",
 		dependencies = {
 			"windwp/nvim-ts-autotag",
 			"nvim-treesitter/playground",
@@ -74,7 +74,7 @@ require("lazy").setup({
 	},
 	{
 		"lewis6991/gitsigns.nvim",
-		event = "BufEnter",
+		event = "VeryLazy",
 		config = function()
 			require("plugins.gitsigns.init").init()
 		end,
@@ -193,7 +193,7 @@ require("lazy").setup({
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		event = "BufEnter",
+		event = "VeryLazy",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("plugins.lualine.init").init()
@@ -202,7 +202,7 @@ require("lazy").setup({
 	{
 		"akinsho/bufferline.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		event = "BufEnter",
+		event = "VeryLazy",
 		config = function()
 			require("plugins.bufferline.init").init()
 		end,
@@ -252,6 +252,7 @@ require("lazy").setup({
 
 	{
 		"terrortylor/nvim-comment",
+		event = "VeryLazy",
 		config = function()
 			require("nvim_comment").setup({})
 		end,
