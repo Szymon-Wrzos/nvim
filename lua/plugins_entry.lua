@@ -36,7 +36,9 @@ require("lazy").setup({
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-
+		build = function()
+			vim.cmd([[:TSUpdate<CR>]])
+		end,
 		event = "BufEnter",
 		dependencies = {
 			"windwp/nvim-ts-autotag",
@@ -261,7 +263,7 @@ require("lazy").setup({
 	},
 	{
 		"folke/which-key.nvim",
-
+		event = "VeryLazy",
 		config = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
