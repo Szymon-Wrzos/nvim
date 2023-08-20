@@ -10,6 +10,7 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
+
 require("lazy").setup({
 
 	{
@@ -22,11 +23,20 @@ require("lazy").setup({
 			})
 		end,
 	},
-	"nvim-tree/nvim-tree.lua",
+	{
+		"nvim-tree/nvim-tree.lua",
+		keys = { {
+			"<leader>rr",
+			"<cmd>:NvimTreeToggle<cr>",
+			desc = "Nvim T[r]ee Toggle",
+		} },
+		config = function()
+			require("plugins.nvim_tree.init").init()
+		end,
+	},
 	{
 		"nvim-treesitter/nvim-treesitter",
 
-		lazy = true,
 		event = "BufEnter",
 		dependencies = {
 			"windwp/nvim-ts-autotag",
@@ -36,7 +46,6 @@ require("lazy").setup({
 	},
 	{
 		"williamboman/mason.nvim",
-		lazy = true,
 		event = "VeryLazy",
 		dependencies = {
 			"b0o/schemastore.nvim",
@@ -47,16 +56,38 @@ require("lazy").setup({
 				"jose-elias-alvarez/null-ls.nvim",
 			} },
 		},
+		config = function()
+			require("mason").setup()
+		end,
 	},
 	{ "jose-elias-alvarez/typescript.nvim" },
 	"nvim-lua/plenary.nvim",
 	"lukas-reineke/lsp-format.nvim",
-	{ "nvim-telescope/telescope.nvim", event = "VeryLazy" },
-	{ "lewis6991/gitsigns.nvim", event = "VeryLazy" },
-	{ "jcdickinson/codeium.nvim", event = "InsertEnter", lazy = true },
+	{
+		"nvim-telescope/telescope.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("plugins.telescope.init").init()
+		end,
+	},
+	{
+		"lewis6991/gitsigns.nvim",
+		event = "BufEnter",
+		config = function()
+			require("plugins.gitsigns.init").init()
+		end,
+	},
+	{
+		"jcdickinson/codeium.nvim",
+		event = "InsertEnter",
+
+		config = function()
+			require("codeium").setup()
+		end,
+	},
 	{
 		"kdheepak/lazygit.nvim",
-		lazy = true,
+
 		keys = { {
 			"<leader>lg",
 			"<cmd>:LazyGit<cr>",
@@ -71,53 +102,9 @@ require("lazy").setup({
 	{
 		"wookayin/wilder.nvim",
 		event = "CmdlineEnter",
-		lazy = true,
+
 		config = function()
-			local wilder = require("wilder")
-
-			local highlights = {
-				accent = wilder.make_hl("WilderAccent", "Pmenu", { { a = 1 }, { a = 1 }, { foreground = "orange" } }),
-			}
-
-			wilder.setup({ modes = { ":", "/", "?", ":%s/" } })
-			-- Disable Python remote plugin
-			wilder.set_option("use_python_remote_plugin", 0)
-
-			wilder.set_option("pipeline", {
-				wilder.branch(
-					wilder.cmdline_pipeline({
-						fuzzy = 1,
-						fuzzy_filter = wilder.lua_fzy_filter(),
-					}),
-					wilder.vim_search_pipeline()
-				),
-			})
-
-			wilder.set_option(
-				"renderer",
-				wilder.renderer_mux({
-					[":"] = wilder.popupmenu_renderer({
-						highlighter = wilder.lua_fzy_highlighter(),
-						highlights = highlights,
-						left = {
-							" ",
-							wilder.popupmenu_devicons(),
-						},
-						right = {
-							" ",
-							wilder.popupmenu_scrollbar(),
-						},
-					}),
-					["/"] = wilder.wildmenu_renderer({
-						highlighter = wilder.lua_fzy_highlighter(),
-						highlights = highlights,
-					}),
-					[":%s/"] = wilder.wildmenu_renderer({
-						highlighter = wilder.lua_fzy_highlighter(),
-						highlights = highlights,
-					}),
-				})
-			)
+			require("plugins.wilder.init").init()
 		end,
 	},
 	"romgrk/fzy-lua-native",
@@ -128,7 +115,7 @@ require("lazy").setup({
 				"rcarriga/nvim-dap-ui",
 			} },
 		},
-		lazy = true,
+
 		keys = {
 			{
 				"<leader>bc",
@@ -157,53 +144,22 @@ require("lazy").setup({
 
 			vim.keymap.set({ "n" }, "<leader>bf", dap.toggle_breakpoint, { desc = "Toggle debug [b]reakpoint" })
 			vim.keymap.set({ "n" }, "<leader>bg", dap.terminate, { desc = "De[b]ug terminate" })
-
-			dap.adapters.python = function(cb, config)
-				vim.print(cb, config)
-				if config.request == "attach" then
-					---@diagnostic disable-next-line: undefined-field
-					local port = (config.connect or config).port
-					---@diagnostic disable-next-line: undefined-field
-					local host = (config.connect or config).host or "127.0.0.1"
-					cb({
-						type = "server",
-						port = assert(port, "`connect.port` is required for a python `attach` configuration"),
-						host = host,
-						options = {
-							source_filetype = "python",
-						},
-					})
-				else
-					cb({
-						type = "executable",
-						command = "python",
-						args = { "-m", "debugpy.adapter" },
-						options = {
-							source_filetype = "python",
-						},
-					})
-				end
-			end
-
-			dap.configurations.python = {
-				{
-					type = "python", -- the type here established the link to the adapter definition: `dap.adapters.python`
-					request = "launch",
-					name = "Launch file",
-					program = "${file}", -- This configuration will launch the current file if used.
-				},
-			}
 		end,
 	},
 
-	{ "ggandor/leap.nvim", dependencies = {
-		"tpope/vim-repeat",
-	} },
+	{
+		"ggandor/leap.nvim",
+		dependencies = {
+			"tpope/vim-repeat",
+		},
+		config = function()
+			require("leap").add_default_mappings()
+		end,
+	},
 
 	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertCharPre",
-		lazy = true,
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "onsails/lspkind.nvim" },
@@ -212,22 +168,52 @@ require("lazy").setup({
 			{ "hrsh7th/cmp-nvim-lua" },
 			{ "saadparwaiz1/cmp_luasnip" },
 			{ "jcha0713/cmp-tw2css" },
-			{ "L3MON4D3/LuaSnip" },
+			{
+				"L3MON4D3/LuaSnip",
+				config = function()
+					-- Snippets
+					require("snippets.javascript.init")
+					require("snippets.css.init")
+
+					vim.keymap.set(
+						{ "n", "i" },
+						"<C-Esc>",
+						require("luasnip").unlink_current,
+						{ desc = "Unlink current snippet" }
+					)
+				end,
+			},
 		},
+		config = function()
+			require("plugins.cmp.init").init()
+		end,
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
+		event = "BufEnter",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("plugins.lualine.init").init()
+		end,
 	},
-	{ "akinsho/bufferline.nvim", dependencies = { "nvim-tree/nvim-web-devicons", lazy = true } },
+	{
+		"akinsho/bufferline.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		event = "BufEnter",
+		config = function()
+			require("plugins.bufferline.init").init()
+		end,
+	},
 
 	{
 		"folke/trouble.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("plugins.trouble.init").init()
+		end,
 	},
 	{
 		"windwp/nvim-spectre",
-		lazy = true,
 		keys = {
 			{
 				"<leader>S",
@@ -254,15 +240,40 @@ require("lazy").setup({
 	{
 		"weilbith/nvim-code-action-menu",
 		cmd = "CodeActionMenu",
+		keys = { {
+			"<leader>ca",
+			"<cmd>:CodeActionMenu<cr>",
+			desc = "[C]ode [A]ction",
+		} },
 	},
-	"terrortylor/nvim-comment",
-	"echasnovski/mini.cursorword",
+
+	{
+		"terrortylor/nvim-comment",
+		config = function()
+			require("nvim_comment").setup({})
+		end,
+	},
+	{
+		"echasnovski/mini.cursorword",
+		config = function()
+			require("mini.cursorword").setup()
+		end,
+	},
 	{
 		"folke/which-key.nvim",
-		lazy = true,
+
 		config = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
+
+			require("plugins.which_key.init").init()
 		end,
+	},
+}, {
+	defaults = {
+		lazy = true,
+	},
+	checker = {
+		enabled = true,
 	},
 })

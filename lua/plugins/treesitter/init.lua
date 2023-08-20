@@ -1,6 +1,9 @@
 require("nvim-treesitter.configs").setup({
 	-- A list of parser names, or "all" (the four listed parsers should always be installed)
 	ensure_installed = { "c", "vim", "markdown", "markdown_inline" },
+	modules = {},
+	sync_install = true,
+	ignore_install = {},
 	auto_install = true,
 	playground = {
 		enable = true,
