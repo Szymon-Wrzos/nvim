@@ -151,6 +151,7 @@ require("lazy").setup({
 
 	{
 		"ggandor/leap.nvim",
+		event = "VeryLazy",
 		dependencies = {
 			"tpope/vim-repeat",
 		},
