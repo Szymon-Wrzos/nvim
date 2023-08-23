@@ -1,34 +1,29 @@
-require("nvim-treesitter.configs").setup({
-	ensure_installed = { "json" },
-	auto_install = true,
-})
+local M = {}
 
-require("mason-lspconfig").setup({
-	ensure_installed = { "jsonls" },
-})
+M.treesitter = { "json" }
 
-require("mason-null-ls").setup({
-	ensure_installed = { "jsonlint", "prettierd" },
-})
-
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-require("lspconfig")["jsonls"].setup({
-	capabilities = capabilities,
-	settings = {
-		json = {
-			schemas = require("schemastore").json.schemas(),
-			validate = { enable = true },
+M.lspconfig = {
+	{
+		lsp = "jsonls",
+		settings = {
+			json = {
+				schemas = require("schemastore").json.schemas(),
+				validate = false,
+			},
 		},
 	},
-})
+}
 
-local null_ls = require("null-ls")
+M.mason.lspconfig = {
+	"jsonls",
+}
 
-null_ls.register({
-	sources = {
-		null_ls.builtins.formatting.prettierd.with({ filetypes = { "json" } }),
-		null_ls.builtins.diagnostics.jsonlint,
-	},
-	debug = true,
-})
+M.mason.null_ls = {
+	"jsonlint",
+	"prettierd",
+}
+
+M.null_ls = {
+	formatter = { { program = "markdownlint", with = { filetypes = { "json" } } } },
+	diagnostics = { { program = "jsonlint" } },
+}

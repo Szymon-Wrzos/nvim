@@ -1,36 +1,25 @@
-require("nvim-treesitter.configs").setup({
-	ensure_installed = { "css" },
-	auto_install = true,
-	highlight = {
-		enable = true,
-	},
-})
+local M = {}
 
-require("mason-lspconfig").setup({
-	ensure_installed = { "cssls", "cssmodules_ls" },
-	automatic_installation = true,
-})
+M.treesitter = {
+	"css",
+	"scss",
+}
 
-require("mason-null-ls").setup({
-	ensure_installed = { "stylelint", "prettierd" },
-	automatic_installation = true,
-})
+M.lspconfig = {
+	{ { lsp = "cssls" }, { lsp = "css_modules" } },
+}
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+M.mason.lspconfig = {
+	"cssls",
+	"css_modules",
+}
 
-require("lspconfig")["cssls"].setup({
-	capabilities = capabilities,
-})
+M.mason.null_ls = {
+	"prettierd",
+	"stylelint",
+}
 
-require("lspconfig")["cssmodules_ls"].setup({
-	capabilities = capabilities,
-})
-
-local null_ls = require("null-ls")
-
-null_ls.register({
-	sources = {
-		null_ls.builtins.formatting.prettierd.with({ filetypes = { "css", "sass", "scss" } }),
-		-- null_ls.builtins.formatting["stylelint"],
-	},
-})
+M.null_ls = {
+	formatting = { { program = "prettierd", with = { filetypes = { "css", "sass", "scss" } } } },
+}
+return M

@@ -1,33 +1,26 @@
-require("nvim-treesitter.configs").setup({
-	ensure_installed = { "bash" },
-	auto_install = true,
-	highlight = {
-		enable = true,
-	},
-})
+local M = {}
 
-require("mason-lspconfig").setup({
-	ensure_installed = { "bashls" },
-	automatic_installation = true,
-})
+M.treesitter = {
+	"bash",
+}
 
-require("mason-null-ls").setup({
-	ensure_installed = { "beautysh", "shellcheck" },
-	automatic_installation = true,
-})
+M.lspconfig = {
+	{ lsp = "bashls" },
+}
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+M.mason.lspconfig = {
+	"bashls",
+}
 
-require("lspconfig")["bashls"].setup({
-	capabilities = capabilities,
-})
+M.mason.null_ls = {
+	"beautysh",
+	"shellcheck",
+}
 
-local null_ls = require("null-ls")
-
-null_ls.register({
-	sources = {
-		null_ls.builtins.formatting.beautysh,
-		null_ls.builtins.diagnostics.shellcheck,
-		null_ls.builtins.code_actions.shellcheck,
-	},
-})
+M.null_ls = {
+	formatter = { { program = "beautysh" } },
+	diagnostics = { { program = "shellcheck" } },
+	code_actions = { { program = "shellcheck" } },
+	rest = {},
+}
+return M

@@ -1,31 +1,22 @@
-require("nvim-treesitter.configs").setup({
-	ensure_installed = { "dockerfile" },
-	auto_install = true,
-	highlight = {
-		enable = true,
-	},
-})
+local M = {}
 
-require("mason-lspconfig").setup({
-	ensure_installed = { "dockerls" },
-	automatic_installation = true,
-})
+M.treesitter = {
+	"dockerfile",
+}
 
-require("mason-null-ls").setup({
-	ensure_installed = { "hadolint" },
-	automatic_installation = true,
-})
+M.lspconfig = {
+	{ lsp = "dockerls" },
+}
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+M.mason.lspconfig = {
+	"dockerls",
+}
 
-require("lspconfig")["dockerls"].setup({
-	capabilities = capabilities,
-})
+M.mason.null_ls = {
+	"hadolint",
+}
 
-local null_ls = require("null-ls")
-
-null_ls.register({
-	sources = {
-		null_ls.builtins.diagnostics.hadolint,
-	},
-})
+M.null_ls = {
+	diagnostics = { { program = "hadolint" } },
+}
+return M

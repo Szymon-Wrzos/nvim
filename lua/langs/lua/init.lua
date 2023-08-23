@@ -1,56 +1,44 @@
-require("nvim-treesitter.configs").setup({
-	ensure_installed = { "lua" },
-	auto_install = true,
-	highlight = {
-		enable = true,
-	},
-})
+local M = {}
 
-require("mason-lspconfig").setup({
-	ensure_installed = { "lua_ls" },
-	automatic_installation = true,
-})
+M.treesitter = { "lua" }
 
-require("mason-null-ls").setup({
-	ensure_installed = { "stylua", "luacheck" },
-	automatic_installation = true,
-})
-
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-require("lspconfig")["lua_ls"].setup({
-	capabilities = capabilities,
-	settings = {
-		Lua = {
-			runtime = {
-				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-				version = "LuaJIT",
-			},
-			diagnostics = {
-				-- Get the language server to recognize the `vim` global
-				globals = { "vim" },
-			},
-			workspace = {
-				-- Make the server aware of Neovim runtime files
-				library = vim.api.nvim_get_runtime_file("", true),
-			},
-			-- Do not send telemetry data containing a randomized but unique identifier
-			telemetry = {
-				enable = false,
+M.lspconfig = {
+	{
+		lsp = "lua_ls",
+		settings = {
+			Lua = {
+				runtime = {
+					-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+					version = "LuaJIT",
+				},
+				diagnostics = {
+					-- Get the language server to recognize the `vim` global
+					globals = { "vim" },
+				},
+				workspace = {
+					-- Make the server aware of Neovim runtime files
+					library = vim.api.nvim_get_runtime_file("", true),
+				},
+				-- Do not send telemetry data containing a randomized but unique identifier
+				telemetry = {
+					enable = false,
+				},
 			},
 		},
 	},
-})
+}
 
-local null_ls = require("null-ls")
+M.mason.lspconfig = {
+	"lua_ls",
+}
 
-null_ls.register({
-	sources = {
-		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.diagnostics.luacheck.with({
-			args = {
-				"--globals vim",
-			},
-		}),
-	},
-})
+M.mason.null_ls = {
+	"stylua",
+	"luacheck",
+}
+
+M.null_ls = {
+	formatter = { { program = "stylua" } },
+	diagnostics = { { program = "luacheck" } },
+}
+return M

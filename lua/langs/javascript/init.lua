@@ -1,35 +1,32 @@
-require("nvim-treesitter.configs").setup({
-	ensure_installed = { "javascript", "typescript", "tsx", "jsdoc" },
-	auto_install = true,
-	highlight = {
-		enable = true,
+local M = {}
+
+M.treesitter = { "javascript", "typescript", "tsx", "jsdoc" }
+
+M.lspconfig = {
+	{ lsp = "tsserver" },
+}
+
+M.mason.lspconfig = {
+	"tsserver",
+}
+
+M.mason.null_ls = {
+	"eslint_d",
+	"prettierd",
+}
+
+M.null_ls = {
+	formatter = {
+		{
+			program = "prettierd",
+			with = { filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" } },
+		},
 	},
-})
+	diagnostics = { { program = "eslint_d" } },
+	code_actions = { { program = "eslint_d" } },
+	rest = {
 
-require("mason-lspconfig").setup({
-	ensure_installed = { "tsserver" },
-	automatic_installation = true,
-})
-
-require("mason-null-ls").setup({
-	ensure_installed = { "eslint_d" },
-	automatic_installation = true,
-})
-
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-require("lspconfig")["tsserver"].setup({
-	capabilities = capabilities,
-})
-
-local null_ls = require("null-ls")
-
-null_ls.register({
-	sources = {
-		null_ls.builtins.formatting.prettierd,
-		null_ls.builtins.diagnostics.eslint_d,
-		null_ls.builtins.code_actions.eslint_d,
 		require("typescript.extensions.null-ls.code-actions"),
 	},
-	debug = true,
-})
+}
+return M

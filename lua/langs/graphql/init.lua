@@ -1,33 +1,22 @@
-require("nvim-treesitter.configs").setup({
-	ensure_installed = { "graphql" },
-	auto_install = true,
-	highlight = {
-		enable = true,
-	},
-})
+local M = {}
 
-require("mason-lspconfig").setup({
-	ensure_installed = { "graphql" },
-	automatic_installation = true,
-})
+M.treesitter = {
+	"graphql",
+}
 
-require("mason-null-ls").setup({
-	ensure_installed = { "prettierd" },
-	automatic_installation = true,
-})
+M.lspconfig = {
+	{ lsp = "graphql" },
+}
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+M.mason.lspconfig = {
+	"graphql",
+}
 
-require("lspconfig")["graphql"].setup({
-	capabilities = capabilities,
-	filetypes = { "gql", "graphql", "javascript", "typescript" },
-})
+M.mason.null_ls = {
+	"prettierd",
+}
 
-local null_ls = require("null-ls")
-
-null_ls.register({
-	sources = {
-		null_ls.builtins.formatting.prettierd.with({ filetypes = { "gql", "graphql" } }),
-	},
-	debug = true,
-})
+M.null_ls = {
+	formatter = { { program = "prettierd", with = { filetypes = { "graphql", "gql" } } } },
+}
+return M

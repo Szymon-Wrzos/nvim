@@ -1,19 +1,20 @@
-require("mason-lspconfig").setup({
-	ensure_installed = { "tailwindcss" },
-	automatic_installation = true,
-})
+local M = {}
 
-require("mason-null-ls").setup({
-	ensure_installed = { "rustywind" },
-	automatic_installation = true,
-})
+M.treesitter = {}
 
-require("lspconfig")["tailwindcss"].setup({})
+M.lspconfig = {
+	{ lsp = "tailwindcss" },
+}
 
-local null_ls = require("null-ls")
+M.mason.lspconfig = {
+	"tailwindcss",
+}
 
-null_ls.register({
-	sources = {
-		null_ls.builtins.formatting.rustywind,
-	},
-})
+M.mason.null_ls = {
+	"rustywind",
+}
+
+M.null_ls = {
+	formatter = { { program = "rustywind" } },
+}
+return M

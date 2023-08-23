@@ -1,46 +1,46 @@
-require("nvim-treesitter.configs").setup({
-	ensure_installed = { "yaml" },
-	auto_install = true,
-	highlight = {
-		enable = true,
-	},
-})
+local M = {}
 
-require("mason-lspconfig").setup({
-	ensure_installed = { "yamlls" },
-})
+M.treesitter = { "yaml" }
 
-require("mason-null-ls").setup({
-	ensure_installed = { "yamllint", "prettierd", "yamlfmt" },
-})
-
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-require("lspconfig")["yamlls"].setup({
-	capabilities = capabilities,
-
-	settings = {
-		yaml = {
-			schemas = require("schemastore").json.schemas(),
-			validate = false,
+M.lspconfig = {
+	{
+		lsp = "yamlls",
+		settings = {
+			yaml = {
+				schemas = require("schemastore").json.schemas(),
+				validate = false,
+			},
 		},
 	},
-})
+}
 
-local null_ls = require("null-ls")
+M.mason.lspconfig = {
+	"yamlls",
+}
 
-null_ls.register({
-	sources = {
-		null_ls.builtins.diagnostics.yamllint.with({
-			args = {
-				"--format",
-				"parsable",
-				"--config-file",
-				os.getenv("HOME") .. "/.config/nvim/lua/langs/yaml/yamllint_config.yml",
-				"--no-warnings",
-				"-",
+M.mason.null_ls = {
+	"yamllint",
+	"yamlfmt",
+	"prettierd",
+}
+
+M.null_ls = {
+	formatter = { { program = "prettierd", with = { filetypes = { "yaml" } } } },
+	diagnostics = {
+		{
+			program = "yamllint",
+			with = {
+				args = {
+					"--format",
+					"parsable",
+					"--config-file",
+					os.getenv("HOME") .. "/.config/nvim/lua/langs/yaml/yamllint_config.yml",
+					"--no-warnings",
+					"-",
+				},
 			},
-		}),
+		},
 	},
-	debug = true,
-})
+}
+
+return M

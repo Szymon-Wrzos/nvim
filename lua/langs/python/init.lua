@@ -1,24 +1,22 @@
-require("nvim-treesitter.configs").setup({
-	ensure_installed = { "python" },
-	auto_install = true,
-})
+local M = {}
 
-require("mason-lspconfig").setup({
-	ensure_installed = { "pyright" },
-	automatic_installation = true,
-})
+M.treesitter = { "python" }
 
-require("mason-null-ls").setup({
-	ensure_installed = { "black" },
-	automatic_installation = true,
-})
+M.lspconfig = {
+	{ lsp = "pyright" },
+}
 
-require("lspconfig")["pyright"].setup({})
+M.mason.lspconfig = {
+	"pyright",
+}
 
-local null_ls = require("null-ls")
+M.mason.null_ls = {
+	"black",
+	"ruff",
+}
 
-null_ls.register({
-	sources = {
-		null_ls.builtins.formatting.black,
-	},
-})
+M.null_ls = {
+	formatter = { { program = "black" }, { program = "ruff" } },
+	diagnostics = { { program = "ruff" } },
+}
+return M

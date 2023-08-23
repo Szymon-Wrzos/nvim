@@ -1,27 +1,24 @@
-require("nvim-treesitter.configs").setup({
-	ensure_installed = { "html" },
-	auto_install = true,
-})
+local M = {}
 
-require("mason-lspconfig").setup({
-	ensure_installed = { "html" },
-})
+M.treesitter = {
+	"html",
+}
 
-require("mason-null-ls").setup({
-	ensure_installed = { "curlylint" },
-})
+M.lspconfig = {
+	{ lsp = "html" },
+}
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+M.mason.lspconfig = {
+	"html",
+}
 
-require("lspconfig")["html"].setup({
-	capabilities = capabilities,
-})
+M.mason.null_ls = {
+	"curlylint",
+	"prettierd",
+}
 
-local null_ls = require("null-ls")
-
-null_ls.register({
-	sources = {
-		null_ls.builtins.diagnostics.curlylint,
-		null_ls.builtins.formatting.prettierd.with({ filetypes = { "html" } }),
-	},
-})
+M.null_ls = {
+	formatter = { { program = "prettierd", with = { filetypes = { "html" } } } },
+	diagnostics = { { program = "curlylint" } },
+}
+return M

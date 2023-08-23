@@ -1,28 +1,20 @@
-require("nvim-treesitter.configs").setup({
-	ensure_installed = { "rust" },
-	auto_install = true,
-	highlight = {
-		enable = true,
-	},
-})
+local M = {}
 
-require("mason-lspconfig").setup({
-	ensure_installed = { "rust_analyzer" },
-})
-require("mason-null-ls").setup({
-	ensure_installed = { "rustfmt" },
-})
+M.treesitter = { "rust" }
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+M.lspconfig = {
+	{ lsp = "rust_analyzer" },
+}
 
-require("lspconfig")["rust_analyzer"].setup({
-	capabilities = capabilities,
-})
+M.mason.lspconfig = {
+	"rust_analyzer",
+}
 
-local null_ls = require("null-ls")
+M.mason.null_ls = {
+	"rustfmt",
+}
 
-null_ls.register({
-	sources = {
-		null_ls.builtins.formatting.rustfmt,
-	},
-})
+M.null_ls = {
+	formatter = { { program = "rustfmt" } },
+}
+return M
