@@ -45,6 +45,9 @@ require("lazy").setup({
 			"nvim-treesitter/playground",
 			"nvim-treesitter/nvim-tree-docs",
 		},
+		config = function()
+			require("plugins.treesitter.init")
+		end,
 	},
 	{
 		"williamboman/mason.nvim",
