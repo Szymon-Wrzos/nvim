@@ -3,9 +3,6 @@ require("plugins_entry")
 require("key_bindings")
 require("opts")
 
--- Plugins setup
-require("plugins.treesitter.init")
-
 -- Languages setup
 local null_ls = require("null-ls")
 null_ls.setup({

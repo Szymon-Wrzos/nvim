@@ -37,7 +37,7 @@ require("lazy").setup({
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = function()
-			vim.cmd([[:TSUpdate<CR>]])
+			vim.cmd([[:TSUpdate]])
 		end,
 		event = "VeryLazy",
 		dependencies = {
@@ -45,6 +45,9 @@ require("lazy").setup({
 			"nvim-treesitter/playground",
 			"nvim-treesitter/nvim-tree-docs",
 		},
+		config = function()
+			require("plugins.treesitter.init")
+		end,
 	},
 	{
 		"williamboman/mason.nvim",
