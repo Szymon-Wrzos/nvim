@@ -8,6 +8,8 @@ M.lspconfig = {
 	{ lsp = "graphql" },
 }
 
+M.mason = {}
+
 M.mason.lspconfig = {
 	"graphql",
 }

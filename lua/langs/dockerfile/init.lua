@@ -8,6 +8,8 @@ M.lspconfig = {
 	{ lsp = "dockerls" },
 }
 
+M.mason = {}
+
 M.mason.lspconfig = {
 	"dockerls",
 }

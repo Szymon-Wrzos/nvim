@@ -8,6 +8,8 @@ M.lspconfig = {
 	{ lsp = "html" },
 }
 
+M.mason = {}
+
 M.mason.lspconfig = {
 	"html",
 }

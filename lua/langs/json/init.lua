@@ -5,14 +5,10 @@ M.treesitter = { "json" }
 M.lspconfig = {
 	{
 		lsp = "jsonls",
-		settings = {
-			json = {
-				schemas = require("schemastore").json.schemas(),
-				validate = false,
-			},
-		},
 	},
 }
+
+M.mason = {}
 
 M.mason.lspconfig = {
 	"jsonls",
@@ -27,3 +23,4 @@ M.null_ls = {
 	formatter = { { program = "markdownlint", with = { filetypes = { "json" } } } },
 	diagnostics = { { program = "jsonlint" } },
 }
+return M

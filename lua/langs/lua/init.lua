@@ -27,7 +27,7 @@ M.lspconfig = {
 		},
 	},
 }
-
+M.mason = {}
 M.mason.lspconfig = {
 	"lua_ls",
 }

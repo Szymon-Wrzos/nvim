@@ -6,6 +6,8 @@ M.lspconfig = {
 	{ lsp = "volar" },
 }
 
+M.mason = {}
+
 M.mason.lspconfig = {
 	"volar",
 }

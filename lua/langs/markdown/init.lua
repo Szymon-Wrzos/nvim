@@ -6,6 +6,8 @@ M.lspconfig = {
 	{ lsp = "marksman" },
 }
 
+M.mason = {}
+
 M.mason.lspconfig = {
 	"marksman",
 }

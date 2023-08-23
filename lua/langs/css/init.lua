@@ -6,8 +6,10 @@ M.treesitter = {
 }
 
 M.lspconfig = {
-	{ { lsp = "cssls" }, { lsp = "css_modules" } },
+	 { lsp = "cssls" }, { lsp = "css_modules" } ,
 }
+
+M.mason = {}
 
 M.mason.lspconfig = {
 	"cssls",

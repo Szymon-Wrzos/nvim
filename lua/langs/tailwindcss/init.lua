@@ -6,6 +6,8 @@ M.lspconfig = {
 	{ lsp = "tailwindcss" },
 }
 
+M.mason = {}
+
 M.mason.lspconfig = {
 	"tailwindcss",
 }

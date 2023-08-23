@@ -6,6 +6,8 @@ M.lspconfig = {
 	{ lsp = "pyright" },
 }
 
+M.mason = {}
+
 M.mason.lspconfig = {
 	"pyright",
 }

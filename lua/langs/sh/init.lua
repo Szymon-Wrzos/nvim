@@ -8,6 +8,8 @@ M.lspconfig = {
 	{ lsp = "bashls" },
 }
 
+M.mason = {}
+
 M.mason.lspconfig = {
 	"bashls",
 }

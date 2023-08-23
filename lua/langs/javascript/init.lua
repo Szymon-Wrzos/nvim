@@ -6,6 +6,8 @@ M.lspconfig = {
 	{ lsp = "tsserver" },
 }
 
+M.mason = {}
+
 M.mason.lspconfig = {
 	"tsserver",
 }
@@ -26,7 +28,6 @@ M.null_ls = {
 	code_actions = { { program = "eslint_d" } },
 	rest = {
 
-		require("typescript.extensions.null-ls.code-actions"),
 	},
 }
 return M

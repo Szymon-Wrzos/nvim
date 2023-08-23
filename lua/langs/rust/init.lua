@@ -6,6 +6,8 @@ M.lspconfig = {
 	{ lsp = "rust_analyzer" },
 }
 
+M.mason = {}
+
 M.mason.lspconfig = {
 	"rust_analyzer",
 }

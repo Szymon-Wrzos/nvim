@@ -5,14 +5,10 @@ M.treesitter = { "yaml" }
 M.lspconfig = {
 	{
 		lsp = "yamlls",
-		settings = {
-			yaml = {
-				schemas = require("schemastore").json.schemas(),
-				validate = false,
-			},
-		},
 	},
 }
+
+M.mason = {}
 
 M.mason.lspconfig = {
 	"yamlls",
