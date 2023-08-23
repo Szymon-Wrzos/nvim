@@ -21,7 +21,7 @@ M.mason.null_ls = {
 }
 
 M.null_ls = {
-	formatter = { { program = "prettierd", with = { filetypes = { "yaml" } } } },
+	formatting = { { program = "prettierd", with = { filetypes = { "yaml" } } } },
 	diagnostics = {
 		{
 			program = "yamllint",

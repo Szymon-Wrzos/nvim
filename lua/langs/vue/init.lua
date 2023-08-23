@@ -18,6 +18,6 @@ M.mason.null_ls = {
 }
 
 M.null_ls = {
-	formatter = { { program = "prettierd", with = { filetypes = { "vue" } } } },
+	formatting = { { program = "prettierd", with = { filetypes = { "vue" } } } },
 }
 return M

@@ -18,7 +18,7 @@ M.mason.null_ls = {
 }
 
 M.null_ls = {
-	formatter = {
+	formatting = {
 		{
 			program = "prettierd",
 			with = { filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" } },

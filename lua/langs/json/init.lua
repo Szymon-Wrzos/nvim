@@ -20,7 +20,7 @@ M.mason.null_ls = {
 }
 
 M.null_ls = {
-	formatter = { { program = "markdownlint", with = { filetypes = { "json" } } } },
+	formatting = { { program = "markdownlint", with = { filetypes = { "json" } } } },
 	diagnostics = { { program = "jsonlint" } },
 }
 return M

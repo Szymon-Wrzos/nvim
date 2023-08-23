@@ -20,7 +20,7 @@ M.mason.null_ls = {
 }
 
 M.null_ls = {
-	formatter = { { program = "prettierd", with = { filetypes = { "html" } } } },
+	formatting = { { program = "prettierd", with = { filetypes = { "html" } } } },
 	diagnostics = { { program = "curlylint" } },
 }
 return M

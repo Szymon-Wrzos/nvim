@@ -20,7 +20,7 @@ M.mason.null_ls = {
 }
 
 M.null_ls = {
-	formatter = { { program = "beautysh" } },
+	formatting = { { program = "beautysh" } },
 	diagnostics = { { program = "shellcheck" } },
 	code_actions = { { program = "shellcheck" } },
 	rest = {},

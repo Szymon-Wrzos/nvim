@@ -17,6 +17,6 @@ M.mason.null_ls = {
 }
 
 M.null_ls = {
-	formatter = { { program = "rustfmt" } },
+	formatting = { { program = "rustfmt" } },
 }
 return M

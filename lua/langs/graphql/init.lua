@@ -19,6 +19,6 @@ M.mason.null_ls = {
 }
 
 M.null_ls = {
-	formatter = { { program = "prettierd", with = { filetypes = { "graphql", "gql" } } } },
+	formatting = { { program = "prettierd", with = { filetypes = { "graphql", "gql" } } } },
 }
 return M
