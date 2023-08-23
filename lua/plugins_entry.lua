@@ -11,8 +11,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
+local mason = require("lazy.config_parts.language")
 
+local lazyinstalls = {  
 	{
 		"rmehri01/onenord.nvim",
 		priority = 1000,
@@ -47,22 +48,6 @@ require("lazy").setup({
 		},
 		config = function()
 			require("plugins.treesitter.init")
-		end,
-	},
-	{
-		"williamboman/mason.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"b0o/schemastore.nvim",
-			{ "williamboman/mason-lspconfig.nvim", dependencies = {
-				"neovim/nvim-lspconfig",
-			} },
-			{ "jay-babu/mason-null-ls.nvim", dependencies = {
-				"jose-elias-alvarez/null-ls.nvim",
-			} },
-		},
-		config = function()
-			require("mason").setup()
 		end,
 	},
 	{ "jose-elias-alvarez/typescript.nvim" },
@@ -277,6 +262,7 @@ require("lazy").setup({
 			require("plugins.which_key.init").init()
 		end,
 	},
+  mason
 }, {
 	defaults = {
 		lazy = true,
@@ -284,4 +270,7 @@ require("lazy").setup({
 	checker = {
 		enabled = true,
 	},
-})
+}
+
+require("lazy").setup(lazyinstalls)
+
