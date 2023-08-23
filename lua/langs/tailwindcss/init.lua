@@ -1,7 +1,3 @@
-require("lazy").install({
-	"roobert/tailwindcss-colorizer-cmp.nvim",
-})
-
 require("mason-lspconfig").setup({
 	ensure_installed = { "tailwindcss" },
 	automatic_installation = true,
