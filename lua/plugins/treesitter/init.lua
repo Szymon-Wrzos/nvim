@@ -1,6 +1,19 @@
+local langs = require("utils.langs_table")
+
+local ensure_installed = { "c", "vim", "markdown", "markdown_inline" }
+
+for _, val in pairs(langs) do
+	for _, entry in pairs(val.treesitter) do
+		require("nvim-treesitter.configs").setup({
+
+			ensure_installed = entry,
+		})
+	end
+end
+
 require("nvim-treesitter.configs").setup({
 	-- A list of parser names, or "all" (the four listed parsers should always be installed)
-	ensure_installed = { "c", "vim", "markdown", "markdown_inline" },
+	ensure_installed = ensure_installed,
 	modules = {},
 	sync_install = true,
 	ignore_install = {},
