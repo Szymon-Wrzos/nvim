@@ -66,14 +66,6 @@ local lazyinstalls = {
 		end,
 	},
 	{
-		"jcdickinson/codeium.nvim",
-		event = "InsertEnter",
-
-		config = function()
-			require("codeium").setup()
-		end,
-	},
-	{
 		"kdheepak/lazygit.nvim",
 
 		keys = { {
@@ -90,11 +82,14 @@ local lazyinstalls = {
 	{
 		"wookayin/wilder.nvim",
 		event = "CmdlineEnter",
+		dependencies = {
+
+			"romgrk/fzy-lua-native",
+		},
 		config = function()
 			require("plugins.wilder.init").init()
 		end,
 	},
-	"romgrk/fzy-lua-native",
 	{
 		"jay-babu/mason-nvim-dap.nvim",
 		dependencies = {
@@ -146,6 +141,7 @@ local lazyinstalls = {
 
 	{
 		"hrsh7th/nvim-cmp",
+		commit = "6c84bc75c64f778e9f1dcb798ed41c7fcb93b639",
 		event = "InsertCharPre",
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp" },
@@ -154,6 +150,12 @@ local lazyinstalls = {
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-nvim-lua" },
 			{ "saadparwaiz1/cmp_luasnip" },
+			{
+				"jcdickinson/codeium.nvim",
+				config = function()
+					require("codeium").setup({})
+				end,
+			},
 			{ "jcha0713/cmp-tw2css" },
 			{
 				"L3MON4D3/LuaSnip",
