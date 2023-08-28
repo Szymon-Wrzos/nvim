@@ -30,7 +30,7 @@ M.init = function()
 	vim.keymap.set("n", "<leader>fn", builtin.lsp_definitions, { desc = "[F]ind defi[n]itions" })
 	telescope.setup({
 		defaults = {
-			file_ignore_patterns = { ".git/.+", "node_modules", "dist" },
+			file_ignore_patterns = { ".git/.+", "node_modules", "dist", "^.git$" },
 			buffer_previewer_maker = new_maker,
 		},
 		pickers = {
