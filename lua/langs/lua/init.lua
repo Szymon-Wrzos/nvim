@@ -39,6 +39,10 @@ M.mason.null_ls = {
 
 M.null_ls = {
 	formatting = { { program = "stylua" } },
-	diagnostics = { { program = "luacheck" } },
+	diagnostics = { { program = "luacheck", with = {
+		args = {
+			"--globals vim",
+		},
+	} } },
 }
 return M
