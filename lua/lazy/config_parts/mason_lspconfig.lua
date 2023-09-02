@@ -38,10 +38,11 @@ local lspconfig = {
 
 		for _, data in pairs(langs_table) do
 			for _, lspdata in pairs(data.lspconfig) do
-				lspconfig[lspdata.lsp].setup({
+				local params = {
 					capabilities = capabilities,
 					settings = lspdata.settings,
-				})
+				}
+				lspconfig[lspdata.lsp].setup(params)
 			end
 		end
 	end,
