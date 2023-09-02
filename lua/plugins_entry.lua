@@ -90,6 +90,18 @@ local lazyinstalls = {
 			require("plugins.wilder.init").init()
 		end,
 	},
+
+	{
+		"ThePrimeagen/refactoring.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = function()
+			require("refactoring").setup()
+		end,
+	},
 	{
 		"jay-babu/mason-nvim-dap.nvim",
 		dependencies = {
