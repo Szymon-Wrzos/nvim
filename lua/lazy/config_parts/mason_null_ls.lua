@@ -1,5 +1,3 @@
-local langs_table = require("utils.langs_table")
-
 local mason = {
 	"williamboman/mason.nvim",
 	event = "VeryLazy",
@@ -12,6 +10,7 @@ local mason_null_ls = {
 
 	event = "VeryLazy",
 	config = function()
+		local langs_table = require("utils.langs_table")
 		local null_ls = require("null-ls")
 		for _, data in pairs(langs_table) do
 			for type, null_ls_data in pairs(data.null_ls) do

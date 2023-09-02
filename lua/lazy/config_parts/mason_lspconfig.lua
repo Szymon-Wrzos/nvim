@@ -1,5 +1,3 @@
-local langs_table = require("utils.langs_table")
-
 local mason = {
 	"williamboman/mason.nvim",
 	event = "VeryLazy",
@@ -14,6 +12,8 @@ local mason_lspconfig = {
 	event = "VeryLazy",
 	config = function()
 		local mason_lsp = require("mason-lspconfig")
+
+		local langs_table = require("utils.langs_table")
 		for _, data in pairs(langs_table) do
 			mason_lsp.setup({
 				ensure_installed = data.mason.lspconfig,
@@ -23,19 +23,22 @@ local mason_lspconfig = {
 	end,
 
 	dependencies = {
-		"b0o/schemastore.nvim",
 		mason,
 	},
 }
 
 local lspconfig = {
 	"neovim/nvim-lspconfig",
-	dependencies = { mason_lspconfig },
+	dependencies = { mason_lspconfig, {
+		"b0o/schemastore.nvim",
+	} },
+	priority = 700,
 	event = "VeryLazy",
 	config = function()
 		local lspconfig = require("lspconfig")
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+		local langs_table = require("utils.langs_table")
 		for _, data in pairs(langs_table) do
 			for _, lspdata in pairs(data.lspconfig) do
 				local params = {
