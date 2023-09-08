@@ -162,7 +162,7 @@ local lazyinstalls = {
 			{ "hrsh7th/cmp-nvim-lua" },
 			{ "saadparwaiz1/cmp_luasnip" },
 			{
-				"jcdickinson/codeium.nvim",
+				"kwon-evan/codeium.nvim",
 				config = function()
 					require("codeium").setup({})
 				end,
