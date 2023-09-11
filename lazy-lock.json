@@ -10,7 +10,6 @@
   "codeium.nvim": { "branch": "main", "commit": "61b751e94cab0aaf5b1f46de40730196330b6d8f" },
   "fzy-lua-native": { "branch": "master", "commit": "820f745b7c442176bcc243e8f38ef4b985febfaf" },
   "gitsigns.nvim": { "branch": "main", "commit": "fef5d90953f0a730483b44745fae5938ba8227f8" },
-  "inlay-hints.nvim": { "branch": "main", "commit": "006b0898f5d3874e8e528352103733142e705834" },
   "lazy.nvim": { "branch": "main", "commit": "2a9354c7d2368d78cbd5575a51a2af5bd8a6ad01" },
   "lazygit.nvim": { "branch": "main", "commit": "75c920883f44243f2bbb172be423e484a58f7c45" },
   "leap.nvim": { "branch": "main", "commit": "5efe985cf68fac3b6a6dfe7a75fbfaca8db2af9c" },
