@@ -25,4 +25,13 @@ M.init = function()
 	})
 end
 
+M.config = {
+	"akinsho/bufferline.nvim",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	event = "VeryLazy",
+	config = function()
+		M.init()
+	end,
+}
+
 return M

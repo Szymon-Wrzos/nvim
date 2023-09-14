@@ -14,4 +14,13 @@ M.init = function()
 	vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
 end
 
+M.config = {
+	"folke/trouble.nvim",
+	event = "InsertEnter",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	config = function()
+		M.init()
+	end,
+}
+
 return M

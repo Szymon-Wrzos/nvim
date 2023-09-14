@@ -41,4 +41,12 @@ M.init = function()
 	})
 end
 
+M.config = {
+	"nvim-telescope/telescope.nvim",
+	event = "VeryLazy",
+	config = function()
+		M.init()
+	end,
+}
+
 return M

@@ -49,4 +49,14 @@ M.init = function()
 		extensions = {},
 	})
 end
+
+M.config = {
+	"nvim-lualine/lualine.nvim",
+	event = "VeryLazy",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	config = function()
+		M.init()
+	end,
+}
+
 return M

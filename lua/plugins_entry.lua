@@ -24,6 +24,7 @@ local lazyinstalls = {
 			})
 		end,
 	},
+	require("plugins.treesitter.init").config,
 	{
 		"nvim-tree/nvim-tree.lua",
 		keys = { {
@@ -35,50 +36,10 @@ local lazyinstalls = {
 			require("plugins.nvim_tree.init").init()
 		end,
 	},
-	{
-		"nvim-treesitter/nvim-treesitter",
-		build = function()
-			vim.cmd([[:TSUpdate]])
-		end,
-		event = "VeryLazy",
-		dependencies = {
-			"windwp/nvim-ts-autotag",
-			"nvim-treesitter/playground",
-			"nvim-treesitter/nvim-tree-docs",
-		},
-		config = function()
-			require("plugins.treesitter.init")
-		end,
-	},
 	"nvim-lua/plenary.nvim",
-	{
-		"nvim-telescope/telescope.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("plugins.telescope.init").init()
-		end,
-	},
-	{
-		"lewis6991/gitsigns.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("plugins.gitsigns.init").init()
-		end,
-	},
-	{
-		"kdheepak/lazygit.nvim",
-
-		keys = { {
-			"<leader>lg",
-			"<cmd>:LazyGit<cr>",
-			desc = "[L]azy[g]it",
-		} },
-		-- optional for floating window border decoration
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-	},
-
+	require("plugins.telescope.init").config,
+	require("plugins.gitsigns.init").config,
+	require("plugins.lazygit.init").config,
 	{
 		"wookayin/wilder.nvim",
 		event = "CmdlineEnter",
@@ -150,69 +111,10 @@ local lazyinstalls = {
 			require("leap").add_default_mappings()
 		end,
 	},
-
-	{
-		"hrsh7th/nvim-cmp",
-		event = "InsertCharPre",
-		dependencies = {
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "onsails/lspkind.nvim" },
-			{ "hrsh7th/cmp-path" },
-			{ "hrsh7th/cmp-buffer" },
-			{ "hrsh7th/cmp-nvim-lua" },
-			{ "saadparwaiz1/cmp_luasnip" },
-			{
-				"jcdickinson/codeium.nvim",
-				config = function()
-					require("codeium").setup({})
-				end,
-			},
-			{ "jcha0713/cmp-tw2css" },
-			{
-				"L3MON4D3/LuaSnip",
-				config = function()
-					-- Snippets
-					require("snippets.javascript.init")
-					require("snippets.css.init")
-
-					vim.keymap.set(
-						{ "n", "i" },
-						"<C-Esc>",
-						require("luasnip").unlink_current,
-						{ desc = "Unlink current snippet" }
-					)
-				end,
-			},
-		},
-		config = function()
-			require("plugins.cmp.init").init()
-		end,
-	},
-	{
-		"nvim-lualine/lualine.nvim",
-		event = "VeryLazy",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function()
-			require("plugins.lualine.init").init()
-		end,
-	},
-	{
-		"akinsho/bufferline.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		event = "VeryLazy",
-		config = function()
-			require("plugins.bufferline.init").init()
-		end,
-	},
-
-	{
-		"folke/trouble.nvim",
-		event = "InsertEnter",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function()
-			require("plugins.trouble.init").init()
-		end,
-	},
+	require("plugins.cmp.init").config,
+	require("plugins.lualine.init").config,
+	require("plugins.bufferline.init").config,
+	require("plugins.trouble.init").config,
 	{
 		"windwp/nvim-spectre",
 		keys = {

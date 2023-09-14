@@ -90,4 +90,41 @@ M.init = function()
 	})
 end
 
+M.config = {
+	"hrsh7th/nvim-cmp",
+	event = "InsertCharPre",
+	dependencies = {
+		{ "hrsh7th/cmp-nvim-lsp" },
+		{ "onsails/lspkind.nvim" },
+		{ "hrsh7th/cmp-path" },
+		{ "hrsh7th/cmp-buffer" },
+		{ "hrsh7th/cmp-nvim-lua" },
+		{ "saadparwaiz1/cmp_luasnip" },
+		{
+			"jcdickinson/codeium.nvim",
+			config = function()
+				require("codeium").setup({})
+			end,
+		},
+		{ "jcha0713/cmp-tw2css" },
+		{
+			"L3MON4D3/LuaSnip",
+			config = function()
+				-- Snippets
+				require("snippets.javascript.init")
+				require("snippets.css.init")
+
+				vim.keymap.set(
+					{ "n", "i" },
+					"<C-Esc>",
+					require("luasnip").unlink_current,
+					{ desc = "Unlink current snippet" }
+				)
+			end,
+		},
+	},
+	config = function()
+		M.init()
+	end,
+}
 return M
