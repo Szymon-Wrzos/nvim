@@ -48,4 +48,15 @@ M.init = function()
 	)
 end
 
+M.config = {
+	"wookayin/wilder.nvim",
+	event = "CmdlineEnter",
+	dependencies = {
+
+		"romgrk/fzy-lua-native",
+	},
+	config = function()
+		M.init()
+	end,
+}
 return M

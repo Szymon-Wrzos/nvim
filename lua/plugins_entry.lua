@@ -14,166 +14,26 @@ vim.opt.rtp:prepend(lazypath)
 local mason = require("lazy.config_parts.language")
 
 local lazyinstalls = {
-	{
-		"rmehri01/onenord.nvim",
-		priority = 1000,
-		lazy = false,
-		config = function()
-			require("onenord").setup({
-				theme = "dark",
-			})
-		end,
-	},
+	require("plugins.colorscheme.init").config,
 	require("plugins.treesitter.init").config,
-	{
-		"nvim-tree/nvim-tree.lua",
-		keys = { {
-			"<leader>rr",
-			"<cmd>:NvimTreeToggle<cr>",
-			desc = "Nvim T[r]ee Toggle",
-		} },
-		config = function()
-			require("plugins.nvim_tree.init").init()
-		end,
-	},
+	require("plugins.nvim_tree.init").config,
 	"nvim-lua/plenary.nvim",
 	require("plugins.telescope.init").config,
 	require("plugins.gitsigns.init").config,
 	require("plugins.lazygit.init").config,
-	{
-		"wookayin/wilder.nvim",
-		event = "CmdlineEnter",
-		dependencies = {
-
-			"romgrk/fzy-lua-native",
-		},
-		config = function()
-			require("plugins.wilder.init").init()
-		end,
-	},
-
-	{
-		"ThePrimeagen/refactoring.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		config = function()
-			require("refactoring").setup()
-		end,
-	},
-	{
-		"jay-babu/mason-nvim-dap.nvim",
-		dependencies = {
-			{ "mfussenegger/nvim-dap", dependencies = {
-				"rcarriga/nvim-dap-ui",
-			} },
-		},
-		keys = {
-			{
-				"<leader>bc",
-				'<cmd>lua require("dap").continue',
-				desc = "De[b]ug [c]ontinue",
-				mode = "n",
-			},
-		},
-		config = function()
-			require("dapui").setup()
-
-			require("mason-nvim-dap").setup({
-				ensure_installed = { "python" },
-				automatic_installation = true,
-			})
-			local dap, dapui = require("dap"), require("dapui")
-			dap.listeners.after.event_initialized["dapui_config"] = function()
-				dapui.open()
-			end
-			dap.listeners.before.event_terminated["dapui_config"] = function()
-				dapui.close()
-			end
-			dap.listeners.before.event_exited["dapui_config"] = function()
-				dapui.close()
-			end
-
-			vim.keymap.set({ "n" }, "<leader>bf", dap.toggle_breakpoint, { desc = "Toggle debug [b]reakpoint" })
-			vim.keymap.set({ "n" }, "<leader>bg", dap.terminate, { desc = "De[b]ug terminate" })
-		end,
-	},
-
-	{
-		"ggandor/leap.nvim",
-		keys = { { "s" }, { "S" }, { "f" }, { "F" } },
-		dependencies = {
-			"tpope/vim-repeat",
-		},
-		config = function()
-			require("leap").add_default_mappings()
-		end,
-	},
+	require("plugins.wilder.init").config,
+	require("plugins.refactoring.init").config,
+	require("plugins.mason.dap").config,
 	require("plugins.cmp.init").config,
 	require("plugins.lualine.init").config,
 	require("plugins.bufferline.init").config,
 	require("plugins.trouble.init").config,
-	{
-		"windwp/nvim-spectre",
-		keys = {
-			{
-				"<leader>S",
-				'<cmd>lua require("spectre").open()<CR>',
-				desc = "Open [S]pectre",
-			},
-			{
-				"<leader>sw",
-				'<cmd>lua require("spectre").open_visual({select_word=true})<CR>',
-				desc = "[s]earch current [w]ord",
-			},
-			{
-				"<leader>sf",
-				'<cmd>lua require("spectre").open_file_search({select_word=true})<CR>',
-				desc = "[s]earch in current [f]ile",
-			},
-		},
-		config = function()
-			require("spectre").setup({
-				live_update = true,
-			})
-		end,
-	},
-	{
-		"weilbith/nvim-code-action-menu",
-		cmd = "CodeActionMenu",
-		keys = { {
-			"<leader>ca",
-			"<cmd>:CodeActionMenu<cr>",
-			desc = "[C]ode [A]ction",
-		} },
-	},
-
-	{
-		"terrortylor/nvim-comment",
-		event = "VeryLazy",
-		config = function()
-			require("nvim_comment").setup({})
-		end,
-	},
-	{
-		"echasnovski/mini.cursorword",
-		event = "InsertEnter",
-		config = function()
-			require("mini.cursorword").setup()
-		end,
-	},
-	{
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		config = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-
-			require("plugins.which_key.init").init()
-		end,
-	},
+	require("plugins.leap.init").config,
+	require("plugins.spectre.init").config,
+	require("plugins.code_action_menu.init").config,
+	require("plugins.nvim_comment.init").config,
+	require("plugins.mini.cursorword").config,
+	require("plugins.which_key.init").config,
 	mason,
 }
 
