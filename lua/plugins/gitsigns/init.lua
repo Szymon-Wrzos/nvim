@@ -22,4 +22,12 @@ M.init = function()
 	})
 end
 
+M.config = {
+	"lewis6991/gitsigns.nvim",
+	event = "VeryLazy",
+	config = function()
+		M.init()
+	end,
+}
+
 return M

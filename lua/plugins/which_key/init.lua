@@ -32,4 +32,14 @@ M.init = function()
 	})
 end
 
+M.config = {
+	"folke/which-key.nvim",
+	event = "VeryLazy",
+	config = function()
+		vim.o.timeout = true
+		vim.o.timeoutlen = 300
+
+		M.init()
+	end,
+}
 return M

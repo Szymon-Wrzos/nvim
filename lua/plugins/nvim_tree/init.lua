@@ -201,4 +201,16 @@ M.init = function()
 		},
 	})
 end
+
+M.config = {
+	"nvim-tree/nvim-tree.lua",
+	keys = { {
+		"<leader>rr",
+		"<cmd>:NvimTreeToggle<cr>",
+		desc = "Nvim T[r]ee Toggle",
+	} },
+	config = function()
+		M.init()
+	end,
+}
 return M
