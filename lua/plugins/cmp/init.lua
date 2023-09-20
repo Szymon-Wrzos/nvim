@@ -15,6 +15,9 @@ M.init = function()
 		performance = {
 			max_view_entries = 20,
 		},
+		experimental = {
+			ghost_text = { hlgroup = "Comment" },
+		},
 		formatting = {
 			format = lspkind.cmp_format({
 				mode = "text_symbol", -- show only symbol annotations
@@ -101,7 +104,7 @@ M.config = {
 		{ "hrsh7th/cmp-nvim-lua" },
 		{ "saadparwaiz1/cmp_luasnip" },
 		{
-			"jcdickinson/codeium.nvim",
+			"Exafunction/codeium.nvim",
 			config = function()
 				require("codeium").setup({})
 			end,
@@ -114,12 +117,9 @@ M.config = {
 				require("snippets.javascript.init")
 				require("snippets.css.init")
 
-				vim.keymap.set(
-					{ "n", "i" },
-					"<C-Esc>",
-					require("luasnip").unlink_current,
-					{ desc = "Unlink current snippet" }
-				)
+				vim.keymap.set({ "n", "i" }, "<C-Esc>", function()
+					require("luasnip").unlink_current()
+				end, { desc = "Unlink current snippet" })
 			end,
 		},
 	},
