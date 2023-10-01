@@ -13,5 +13,6 @@ local langs_table = {
 	vue = require("langs.vue.init"),
 	sh = require("langs.sh.init"),
 	dockerfile = require("langs.dockerfile.init"),
+	astro = require("langs.astro.init"),
 }
 return langs_table
