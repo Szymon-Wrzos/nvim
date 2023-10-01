@@ -12,9 +12,9 @@ M.init = function()
 		return " " .. icon .. count
 	end
 
-	map("n", "<C-l>", "<cmd>:BufferLineCycleNext<cr>", { desc = "Next Tab" })
+	map("n", "<C-;>", "<cmd>:BufferLineCycleNext<cr>", { desc = "Next Tab" })
 	map("n", "<C-k>", "<cmd>:BufferLineCyclePrev<cr>", { desc = "Previous Tab" })
-	map("n", "<leader>l", "<cmd>:BufferLineCloseRight<cr>", { desc = "Close tabs to the right" })
+	map("n", "<leader>;", "<cmd>:BufferLineCloseRight<cr>", { desc = "Close tabs to the right" })
 	map("n", "<leader>k", "<cmd>:BufferLineCloseLeft<cr>", { desc = "Close tabs to the left" })
 
 	bufferline.setup({
