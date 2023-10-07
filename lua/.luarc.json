@@ -1,11 +1,14 @@
 {
-    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-    "workspace.checkThirdParty": true,
     "workspace.library": [
-        "/home/szymon/.local/share/nvim/lazy/lazy.nvim",
         "/home/szymon/.config/nvim",
-        "/home/szymon/.local/share/bob/v0.9.1/nvim-linux64/share/nvim/runtime",
-        "/home/szymon/.local/share/bob/v0.9.1/nvim-linux64/lib/nvim",
+        "/home/szymon/.local/share/nvim/lazy/lazy.nvim",
+        "/home/szymon/.local/share/nvim/lazy/mason.nvim",
+        "/home/szymon/.local/share/nvim/lazy/mason-lspconfig.nvim",
+        "/home/szymon/.local/share/nvim/lazy/onenord.nvim",
+        "/home/szymon/.local/share/bob/nightly/nvim-linux64/share/nvim/runtime",
+        "/home/szymon/.local/share/bob/nightly/nvim-linux64/share/nvim/runtime/pack/dist/opt/matchit",
+        "/home/szymon/.local/share/bob/nightly/nvim-linux64/lib/nvim",
+        "/home/szymon/.local/state/nvim/lazy/readme",
         "${3rd}/luassert/library"
     ]
 }
