@@ -55,7 +55,10 @@ M.config = {
 				{
 					"theHamsta/nvim-dap-virtual-text",
 					config = function()
-						require("nvim-dap-virtual-text").setup()
+						require("nvim-dap-virtual-text").setup({
+							virt_text_pos = "inline",
+							all_frames = true,
+						})
 					end,
 				},
 			},
