@@ -10,5 +10,7 @@
         "/home/szymon/.local/share/bob/nightly/nvim-linux64/lib/nvim",
         "/home/szymon/.local/state/nvim/lazy/readme",
         "${3rd}/luassert/library"
-    ]
+    ],
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "workspace.checkThirdParty": false
 }

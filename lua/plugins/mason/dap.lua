@@ -2,12 +2,17 @@ local M = {}
 
 M.init = function()
 	require("dapui").setup()
-
-	require("mason-nvim-dap").setup({
-		ensure_installed = { "python" },
-		automatic_installation = true,
-	})
 	local dap, dapui = require("dap"), require("dapui")
+
+	local langs = require("utils.langs_table")
+
+	for k, v in pairs(langs) do
+		if v.dap ~= nil then
+			dap.configurations[k] = v.dap.config
+			dap.adapters[k] = v.dap.adapter
+		end
+	end
+
 	dap.listeners.after.event_initialized["dapui_config"] = function()
 		dapui.open()
 	end
@@ -23,22 +28,44 @@ M.init = function()
 end
 
 M.config = {
-	"jay-babu/mason-nvim-dap.nvim",
+	"rcarriga/nvim-dap-ui",
+	event = "VeryLazy",
 	dependencies = {
-		{ "mfussenegger/nvim-dap", dependencies = {
-			"rcarriga/nvim-dap-ui",
-		} },
-	},
-	keys = {
 		{
-			"<leader>bc",
-			'<cmd>lua require("dap").continue',
-			desc = "De[b]ug [c]ontinue",
-			mode = "n",
+			"mfussenegger/nvim-dap",
+			dependencies = {
+				{
+					"jay-babu/mason-nvim-dap.nvim",
+					event = "VeryLazy",
+					config = function()
+						local langs = require("utils.langs_table")
+						local vals_with_dap = {}
+						for k, v in pairs(langs) do
+							if v.dap ~= nil then
+								table.insert(vals_with_dap, v.dap.mason)
+							end
+						end
+
+						require("mason-nvim-dap").setup({
+							ensure_installed = vim.tbl_flatten(vals_with_dap),
+							automatic_installation = true,
+						})
+					end,
+				},
+			},
+			keys = {
+				{
+					"<leader>bc",
+					"<cmd>DapContinue<CR>",
+					desc = "De[b]ug [c]ontinue",
+					mode = "n",
+				},
+			},
+			config = function()
+				M.init()
+			end,
 		},
 	},
-	config = function()
-		M.init()
-	end,
 }
+
 return M
