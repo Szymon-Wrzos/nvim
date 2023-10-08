@@ -24,6 +24,8 @@ M.null_ls = {
 
 M.dap = {}
 
+M.dap.names = { "python" }
+
 M.dap.mason = { "python" }
 
 M.dap.adapter = function(cb, config)
