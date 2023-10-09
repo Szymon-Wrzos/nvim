@@ -7,17 +7,16 @@ M.init = function()
 
 	for _, val in pairs(langs) do
 		for _, entry in pairs(val.treesitter) do
-			require("nvim-treesitter.configs").setup({
-
-				ensure_installed = entry,
-			})
+			table.insert(ensure_installed, entry)
 		end
 	end
 
 	require("nvim-treesitter.configs").setup({
 		-- A list of parser names, or "all" (the four listed parsers should always be installed)
-		ensure_installed = ensure_installed,
-		modules = {},
+		ensure_installed = vim.tbl_flatten(ensure_installed),
+		highlight = {
+			enable = true,
+		},
 		sync_install = true,
 		ignore_install = {},
 		auto_install = true,
