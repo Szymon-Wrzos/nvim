@@ -27,7 +27,20 @@ end
 
 M.config = {
 	"akinsho/bufferline.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+		config = function()
+			require("nvim-web-devicons").setup({
+				override_by_extension = {
+					["astro"] = {
+						icon = "A",
+						color = "#FF5733",
+						name = "astro",
+					},
+				},
+			})
+		end,
+	},
 	event = "VeryLazy",
 	config = function()
 		M.init()
