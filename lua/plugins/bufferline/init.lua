@@ -33,7 +33,7 @@ M.config = {
 			require("nvim-web-devicons").setup({
 				override_by_extension = {
 					["astro"] = {
-						icon = "A",
+						icon = "󰑣",
 						color = "#FF5733",
 						name = "astro",
 					},
