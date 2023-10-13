@@ -14,12 +14,15 @@ local mason_lspconfig = {
 		local mason_lsp = require("mason-lspconfig")
 
 		local langs_table = require("utils.langs_table")
+		local mason_lspconfig_entries = {}
 		for _, data in pairs(langs_table) do
-			mason_lsp.setup({
-				ensure_installed = data.mason.lspconfig,
-				automatic_installation = true,
-			})
+			table.insert(mason_lspconfig_entries, data.mason.lspconfig)
 		end
+
+		mason_lsp.setup({
+			ensure_installed = vim.tbl_flatten(mason_lspconfig_entries),
+			automatic_installation = true,
+		})
 	end,
 
 	dependencies = {
