@@ -1,7 +1,7 @@
 local langs_table = {
 	lua = require("langs.lua.init"),
 	rust = require("langs.rust.init"),
-	js = require("langs.javascript.init"),
+	javascript = require("langs.javascript.init"),
 	css = require("langs.css.init"),
 	html = require("langs.html.init"),
 	tailwindcss = require("langs.tailwindcss.init"),
