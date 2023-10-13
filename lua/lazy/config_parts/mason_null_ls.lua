@@ -7,22 +7,22 @@ local mason = {
 }
 
 local function inArray(arr, element) -- function to check if something is in an array
-    for _, value in ipairs(arr) do -- ipairs is the recommended iterator for looping through arrays
-        if value == element then
-            return true
-        end
-    end
-    return false -- if no element was found, return false
+	for _, value in ipairs(arr) do -- ipairs is the recommended iterator for looping through arrays
+		if value == element then
+			return true
+		end
+	end
+	return false -- if no element was found, return false
 end
 
 local function removeDuplicates(arr)
-    local newArray = {} -- new array that will be arr, but without duplicates
-    for _, element in ipairs(arr) do
-        if not inArray(newArray, element) then -- making sure we had not added it yet to prevent duplicates
-            table.insert(newArray, element) 
-        end
-    end
-    return newArray -- returning the new, duplicate removed array
+	local newArray = {} -- new array that will be arr, but without duplicates
+	for _, element in ipairs(arr) do
+		if not inArray(newArray, element) then -- making sure we had not added it yet to prevent duplicates
+			table.insert(newArray, element)
+		end
+	end
+	return newArray -- returning the new, duplicate removed array
 end
 
 local mason_null_ls = {
@@ -33,13 +33,13 @@ local mason_null_ls = {
 		local langs_table = require("utils.langs_table")
 		local null_ls = require("null-ls")
 
-    local ensure_installed = {}
-    for _, val in pairs(langs_table) do
-      table.insert(ensure_installed, val.mason.null_ls)
-    end
-    local flattened_table =  vim.tbl_flatten(ensure_installed)
-    local deduplicated_table = removeDuplicates(flattened_table)
-    require("mason-null-ls").setup({ ensure_installed = deduplicated_table })
+		local ensure_installed = {}
+		for _, val in pairs(langs_table) do
+			table.insert(ensure_installed, val.mason.null_ls)
+		end
+		local flattened_table = vim.tbl_flatten(ensure_installed)
+		local deduplicated_table = removeDuplicates(flattened_table)
+		require("mason-null-ls").setup({ ensure_installed = deduplicated_table })
 		for _, data in pairs(langs_table) do
 			for type, null_ls_data in pairs(data.null_ls) do
 				local sources = {}
@@ -60,13 +60,11 @@ local null_ls = {
 	config = function()
 		-- Languages setup
 		local null_ls = require("null-ls")
-    local null_ls_data = {}
+		local null_ls_data = {}
 		local langs_table = require("utils.langs_table")
-    for _, val in pairs(langs_table) do
-      table.insert(null_ls_data, val.mason.null_ls)
-    end
-    local flattened_table =  vim.tbl_flatten(null_ls_data)
-    local deduplicated_table = removeDuplicates(flattened_table)
+		for _, val in pairs(langs_table) do
+			table.insert(null_ls_data, val.mason.null_ls)
+		end
 		null_ls.setup({
 			sources = {
 				null_ls.builtins.completion.luasnip,
