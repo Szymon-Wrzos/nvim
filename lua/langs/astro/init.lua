@@ -22,5 +22,6 @@ M.null_ls = {
 		{ program = "rustywind", with = { filetypes = { "astro" } } },
 	},
 	diagnostics = { { program = "eslint_d", with = { filetypes = { "astro" } } } },
+	code_actions = { { program = "eslint_d" } },
 }
 return M
