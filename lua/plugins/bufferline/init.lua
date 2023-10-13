@@ -29,6 +29,7 @@ M.config = {
 	"akinsho/bufferline.nvim",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
+		event = "VeryLazy",
 		config = function()
 			require("nvim-web-devicons").setup({
 				override_by_extension = {
@@ -41,7 +42,7 @@ M.config = {
 			})
 		end,
 	},
-	event = "VeryLazy",
+	event = "BufAdd",
 	config = function()
 		M.init()
 	end,

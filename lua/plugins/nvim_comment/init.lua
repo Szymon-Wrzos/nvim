@@ -6,7 +6,7 @@ end
 
 M.config = {
 	"terrortylor/nvim-comment",
-	event = "VeryLazy",
+	event = "BufNew",
 	config = M.init,
 }
 

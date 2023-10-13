@@ -6,7 +6,7 @@ end
 
 M.config = {
 	"ThePrimeagen/refactoring.nvim",
-	event = "VeryLazy",
+	cmd = "Refactor",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
