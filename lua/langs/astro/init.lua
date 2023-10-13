@@ -11,7 +11,7 @@ M.lspconfig = {
 M.mason = {}
 
 M.mason.lspconfig = {
-	"astro-language-server",
+	"astro",
 }
 
 M.mason.null_ls = {}
