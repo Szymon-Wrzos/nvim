@@ -43,6 +43,7 @@ M.config = {
 			dependencies = {
 				{
 					"jay-babu/mason-nvim-dap.nvim",
+					event = "VeryLazy",
 					config = function()
 						local langs = require("utils.langs_table")
 						local vals_with_dap = {}
