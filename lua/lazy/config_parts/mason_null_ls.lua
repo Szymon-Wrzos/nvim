@@ -31,7 +31,6 @@ local mason_null_ls = {
 	event = "VeryLazy",
 	config = function()
 		local langs_table = require("utils.langs_table")
-		local null_ls = require("null-ls")
 
 		local ensure_installed = {}
 		for _, val in pairs(langs_table) do
@@ -40,8 +39,22 @@ local mason_null_ls = {
 		local flattened_table = vim.tbl_flatten(ensure_installed)
 		local deduplicated_table = removeDuplicates(flattened_table)
 		require("mason-null-ls").setup({ ensure_installed = deduplicated_table })
+	end,
+	dependencies = { mason },
+}
 
-		local sources = {}
+local null_ls = {
+	"jose-elias-alvarez/null-ls.nvim",
+
+	event = "VeryLazy",
+	config = function()
+		-- Languages setup
+		local null_ls = require("null-ls")
+		local langs_table = require("utils.langs_table")
+
+		local sources = {
+			null_ls.builtins.completion.luasnip,
+		}
 
 		for _, data in pairs(langs_table) do
 			for type, null_ls_data in pairs(data.null_ls) do
@@ -52,26 +65,8 @@ local mason_null_ls = {
 			end
 		end
 
-		null_ls.register({ sources = sources })
-	end,
-	dependencies = { mason },
-}
-local null_ls = {
-	"jose-elias-alvarez/null-ls.nvim",
-
-	event = "VeryLazy",
-	config = function()
-		-- Languages setup
-		local null_ls = require("null-ls")
-		local null_ls_data = {}
-		local langs_table = require("utils.langs_table")
-		for _, val in pairs(langs_table) do
-			table.insert(null_ls_data, val.mason.null_ls)
-		end
 		null_ls.setup({
-			sources = {
-				null_ls.builtins.completion.luasnip,
-			},
+			sources = sources,
 			on_attach = require("lsp-format").on_attach,
 		})
 	end,
