@@ -40,16 +40,19 @@ local mason_null_ls = {
 		local flattened_table = vim.tbl_flatten(ensure_installed)
 		local deduplicated_table = removeDuplicates(flattened_table)
 		require("mason-null-ls").setup({ ensure_installed = deduplicated_table })
+
+		local sources = {}
+
 		for _, data in pairs(langs_table) do
 			for type, null_ls_data in pairs(data.null_ls) do
-				local sources = {}
 				for _, val in pairs(null_ls_data) do
 					local null_ls_builtin = null_ls.builtins[type][val.program]
 					table.insert(sources, val.with and null_ls_builtin.with(val.with) or null_ls_builtin)
 				end
-				null_ls.register({ sources = sources })
 			end
 		end
+
+		null_ls.register({ sources = sources })
 	end,
 	dependencies = { mason },
 }
