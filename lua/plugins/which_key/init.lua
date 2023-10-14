@@ -34,7 +34,8 @@ end
 
 M.config = {
 	"folke/which-key.nvim",
-	event = "VeryLazy",
+	cmd = "WhichKey",
+	keys = { { "<leader>" }, { '"' }, { "`" }, { "d" }, { "z" }, { "c" }, { "v" }, { "g" }, { "y" }, { "!" } },
 	config = function()
 		vim.o.timeout = true
 		vim.o.timeoutlen = 300
