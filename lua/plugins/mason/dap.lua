@@ -29,14 +29,20 @@ end
 
 M.config = {
 	"rcarriga/nvim-dap-ui",
-	event = "VeryLazy",
+	keys = {
+		{
+			"<leader>bc",
+			"<cmd>DapContinue<CR>",
+			desc = "De[b]ug [c]ontinue",
+			mode = "n",
+		},
+	},
 	dependencies = {
 		{
 			"mfussenegger/nvim-dap",
 			dependencies = {
 				{
 					"jay-babu/mason-nvim-dap.nvim",
-					event = "VeryLazy",
 					config = function()
 						local langs = require("utils.langs_table")
 						local vals_with_dap = {}
@@ -60,14 +66,6 @@ M.config = {
 							all_frames = true,
 						})
 					end,
-				},
-			},
-			keys = {
-				{
-					"<leader>bc",
-					"<cmd>DapContinue<CR>",
-					desc = "De[b]ug [c]ontinue",
-					mode = "n",
 				},
 			},
 			config = function()
