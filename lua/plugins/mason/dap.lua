@@ -23,8 +23,7 @@ M.init = function()
 		dapui.close()
 	end
 
-	vim.keymap.set({ "n" }, "<leader>bf", dap.toggle_breakpoint, { desc = "Toggle debug [b]reakpoint" })
-	vim.keymap.set({ "n" }, "<leader>bg", dap.terminate, { desc = "De[b]ug terminate" })
+	vim.keymap.set({ "n" }, "<leader>be", dap.terminate, { desc = "De[b]ug t[e]rminate" })
 end
 
 M.config = {
@@ -34,6 +33,13 @@ M.config = {
 			"<leader>bc",
 			"<cmd>DapContinue<CR>",
 			desc = "De[b]ug [c]ontinue",
+			mode = "n",
+		},
+
+		{
+			"<leader>bd",
+			"<cmd>DapToggleBreakpoint<CR>",
+			desc = "Toggle [d]ebug breakpoint",
 			mode = "n",
 		},
 	},
@@ -56,15 +62,6 @@ M.config = {
 							ensure_installed = vim.tbl_flatten(vals_with_dap),
 							automatic_installation = true,
 							handlers = {},
-						})
-					end,
-				},
-				{
-					"theHamsta/nvim-dap-virtual-text",
-					config = function()
-						require("nvim-dap-virtual-text").setup({
-							virt_text_pos = "inline",
-							all_frames = true,
 						})
 					end,
 				},
