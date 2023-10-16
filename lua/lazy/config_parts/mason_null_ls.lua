@@ -43,6 +43,35 @@ local mason_null_ls = {
 	dependencies = { mason },
 }
 
+local null_ls_iterator = function()
+	local null_ls = require("null-ls")
+	local langs_table = require("utils.langs_table")
+
+	local languages = {}
+
+	for lang, data in pairs(langs_table) do
+		table.insert(languages, { language = lang, data = data })
+	end
+
+	local idx = 1
+
+	return function()
+		local current_data = languages[idx].data.null_ls
+		local lang_sources = {}
+		if idx == #languages then
+			return nil
+		end
+		for type, null_ls_data in pairs(current_data) do
+			for _, val in pairs(null_ls_data) do
+				local null_ls_builtin = null_ls.builtins[type][val.program]
+				table.insert(lang_sources, val.with and null_ls_builtin.with(val.with) or null_ls_builtin)
+			end
+		end
+		idx = idx + 1
+		return idx, lang_sources
+	end
+end
+
 local null_ls = {
 	"jose-elias-alvarez/null-ls.nvim",
 
@@ -50,25 +79,23 @@ local null_ls = {
 	config = function()
 		-- Languages setup
 		local null_ls = require("null-ls")
-		local langs_table = require("utils.langs_table")
 
 		local sources = {
 			null_ls.builtins.completion.luasnip,
 		}
-
-		for _, data in pairs(langs_table) do
-			for type, null_ls_data in pairs(data.null_ls) do
-				for _, val in pairs(null_ls_data) do
-					local null_ls_builtin = null_ls.builtins[type][val.program]
-					table.insert(sources, val.with and null_ls_builtin.with(val.with) or null_ls_builtin)
+		local iterator = null_ls_iterator()
+		vim.schedule(function()
+			for _, lang_sources in iterator do
+				for _, source in pairs(lang_sources) do
+					table.insert(sources, source)
 				end
 			end
-		end
 
-		null_ls.setup({
-			sources = sources,
-			on_attach = require("lsp-format").on_attach,
-		})
+			null_ls.setup({
+				sources = sources,
+				on_attach = require("lsp-format").on_attach,
+			})
+		end)
 	end,
 	dependencies = {
 		mason_null_ls,
