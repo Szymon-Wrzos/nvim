@@ -13,7 +13,7 @@ M.init = function()
 
 	require("nvim-treesitter.configs").setup({
 		-- A list of parser names, or "all" (the four listed parsers should always be installed)
-		ensure_installed = vim.tbl_flatten(ensure_installed),
+		ensure_installed = ensure_installed,
 		highlight = {
 			enable = true,
 		},
