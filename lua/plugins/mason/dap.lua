@@ -56,13 +56,14 @@ M.config = {
 						local vals_with_dap = {}
 						for _, v in pairs(langs) do
 							if v.dap ~= nil then
-								table.insert(vals_with_dap, v.dap.mason)
+								for _, mason_entry in pairs(v.dap.mason) do
+									table.insert(vals_with_dap, mason_entry)
+								end
 							end
 						end
 						require("mason-nvim-dap").setup({
-							ensure_installed = vim.tbl_flatten(vals_with_dap),
+							ensure_installed = vals_with_dap,
 							automatic_installation = true,
-							handlers = {},
 						})
 					end,
 				},
