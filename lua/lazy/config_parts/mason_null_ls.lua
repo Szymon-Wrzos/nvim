@@ -15,16 +15,6 @@ local function inArray(arr, element) -- function to check if something is in an 
 	return false -- if no element was found, return false
 end
 
-local function removeDuplicates(arr)
-	local newArray = {} -- new array that will be arr, but without duplicates
-	for _, element in ipairs(arr) do
-		if not inArray(newArray, element) then -- making sure we had not added it yet to prevent duplicates
-			table.insert(newArray, element)
-		end
-	end
-	return newArray -- returning the new, duplicate removed array
-end
-
 local mason_null_ls = {
 	"jay-babu/mason-null-ls.nvim",
 
@@ -34,11 +24,13 @@ local mason_null_ls = {
 
 		local ensure_installed = {}
 		for _, val in pairs(langs_table) do
-			table.insert(ensure_installed, val.mason.null_ls)
+			for _, null_ls_program in pairs(val.mason.null_ls) do
+				if not inArray(ensure_installed, null_ls_program) then
+					table.insert(ensure_installed, null_ls_program)
+				end
+			end
 		end
-		local flattened_table = vim.tbl_flatten(ensure_installed)
-		local deduplicated_table = removeDuplicates(flattened_table)
-		require("mason-null-ls").setup({ ensure_installed = deduplicated_table })
+		require("mason-null-ls").setup({ ensure_installed = ensure_installed })
 	end,
 	dependencies = { mason },
 }
