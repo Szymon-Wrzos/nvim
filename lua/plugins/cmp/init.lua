@@ -30,6 +30,8 @@ M.init = function()
 				end,
 				menu = {
 					nvim_lsp = "[LSP]",
+					nvim_lsp_signature_help = "[LSP-Sign]",
+					spell = "[Spell]",
 					luasnip = "[Luasnip]",
 					path = "[Path]",
 					buffer = "[Buffer]",
@@ -54,8 +56,18 @@ M.init = function()
 					return require("cmp").lsp.CompletionItemKind.Snippet ~= entry:get_kind()
 				end,
 			},
+			{ name = "nvim_lsp_signature_help" },
 			{
 				name = "nvim_lua",
+			},
+			{
+				name = "spell",
+				option = {
+					keep_all_entries = false,
+					enable_in_context = function()
+						return true
+					end,
+				},
 			},
 			{ name = "path" },
 			{ name = "buffer" },
@@ -103,6 +115,8 @@ M.config = {
 		{ "hrsh7th/cmp-buffer" },
 		{ "hrsh7th/cmp-nvim-lua" },
 		{ "saadparwaiz1/cmp_luasnip" },
+		{ "hrsh7th/cmp-nvim-lsp-signature-help" },
+		{ "f3fora/cmp-spell" },
 		{
 			"Exafunction/codeium.nvim",
 			config = function()
