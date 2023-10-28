@@ -1,10 +1,7 @@
 local create_snippet = require("snippets.create_printing_snippet")
 
 local query = [[
-(
- field (identifier) @name
- (function_call (identifier) @name (arguments (function_definition)))
-)
+(field (identifier) @name)
 ( 
   assignment_statement (
     (variable_list (identifier) @name)
