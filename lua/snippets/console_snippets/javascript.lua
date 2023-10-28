@@ -8,6 +8,7 @@ local query = [[
 (variable_declarator (identifier) @name (arrow_function) (#set! "fetch_last" "true"))
 (method_definition (private_property_identifier) @name)
 (method_definition (property_identifier) @name)
+(pair (property_identifier) @key)
 ]]
 
 local breakpoints = {
@@ -15,6 +16,7 @@ local breakpoints = {
 	"function_declaration",
 	"variable_declarator",
 	"method_definition",
+	"pair",
 }
 
 local format = [[console.log("[{function_name}]", {var})]]
