@@ -15,9 +15,6 @@ M.init = function()
 		performance = {
 			max_view_entries = 20,
 		},
-		experimental = {
-			ghost_text = { hlgroup = "Comment" },
-		},
 		formatting = {
 			format = lspkind.cmp_format({
 				mode = "text_symbol", -- show only symbol annotations
