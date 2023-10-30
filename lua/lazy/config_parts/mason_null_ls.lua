@@ -65,7 +65,7 @@ local null_ls_iterator = function()
 end
 
 local null_ls = {
-	"jose-elias-alvarez/null-ls.nvim",
+	"nvimtools/none-ls.nvim",
 
 	event = "VeryLazy",
 	config = function()
