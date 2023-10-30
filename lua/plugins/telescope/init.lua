@@ -31,6 +31,9 @@ M.init = function()
 			find_files = {
 				hidden = true,
 			},
+			live_grep = {
+				debounce = 250,
+			},
 		},
 	})
 end
