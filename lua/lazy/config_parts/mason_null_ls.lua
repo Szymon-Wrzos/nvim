@@ -76,18 +76,16 @@ local null_ls = {
 			null_ls.builtins.completion.luasnip,
 		}
 		local iterator = null_ls_iterator()
-		vim.schedule(function()
-			for _, lang_sources in iterator do
-				for _, source in pairs(lang_sources) do
-					table.insert(sources, source)
-				end
+		for _, lang_sources in iterator do
+			for _, source in pairs(lang_sources) do
+				table.insert(sources, source)
 			end
+		end
 
-			null_ls.setup({
-				sources = sources,
-				on_attach = require("lsp-format").on_attach,
-			})
-		end)
+		null_ls.setup({
+			sources = sources,
+			on_attach = require("lsp-format").on_attach,
+		})
 	end,
 	dependencies = {
 		mason_null_ls,
