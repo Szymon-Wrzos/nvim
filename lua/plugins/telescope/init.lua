@@ -2,7 +2,6 @@ local M = {}
 
 M.init = function()
 	local telescope = require("telescope")
-	local builtin = require("telescope.builtin")
 	local previewers = require("telescope.previewers")
 
 	local new_maker = function(filepath, bufnr, opts)
@@ -30,9 +29,11 @@ M.init = function()
 		pickers = {
 			find_files = {
 				hidden = true,
+				find_command = { "rg", "--files" },
 			},
 			live_grep = {
 				debounce = 250,
+				find_command = { "rg" },
 			},
 		},
 	})
